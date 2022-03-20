@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Rigidbody2D rb;
+
     [Header("Stats")]
     public int max_health;
     public int current_health;
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()

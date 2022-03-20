@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     [Header("Stats")]
     public int max_health;
     public int current_health;
@@ -21,38 +20,104 @@ public class Player : MonoBehaviour
     public string passive;
     public int currency = 0;
 
-    public void SetPlayerClass(string _class, int _max_health, int _speed, int _stamina, int _power, int _poise, int _guard, string _skill1, string _skill2, string _passive)
+    public void SetPlayerClass(string _class)
     {
-        player_class = _class;
-        max_health = _max_health;
-        speed = _speed;
-        stamina = _stamina;
-        power = _power;
-        poise = _poise;
-        guard = _guard;
-        skill1 = _skill1;
-        skill2 = _skill2;
-        passive = _passive;
+        switch (_class)
+        {
+            case "Warrior":
+                player_class = _class;
+                max_health = 110;
+                speed = 2;
+                stamina = 2;
+                power = 4;
+                poise = 3;
+                guard = 2;
+                skill1 = "Berserk";
+                skill2 = "Cleave";
+                passive = "Adrenaline";
+                break;
+            case "Paladin":
+                player_class = _class;
+                max_health = 120;
+                speed = 2;
+                stamina = 1;
+                power = 3;
+                poise = 4;
+                guard = 3;
+                skill1 = "Blood Covenant";
+                skill2 = "Shield Bash";
+                passive = "Intervention";
+                break;
+            case "Wizard":
+                player_class = _class;
+                max_health = 80;
+                speed = 3;
+                stamina = 2;
+                power = 4;
+                poise = 1;
+                guard = 2;
+                skill1 = "Arcane Aura";
+                skill2 = "Blink";
+                passive = "Mirrorlink";
+                break;
+            case "Conduit":
+                player_class = _class;
+                max_health = 90;
+                speed = 4;
+                stamina = 3;
+                power = 2;
+                poise = 2;
+                guard = 2;
+                skill1 = "Magfield";
+                skill2 = "Whiplash";
+                passive = "Spark";
+                break;
+            case "Wraith":
+                player_class = _class;
+                max_health = 100;
+                speed = 3;
+                stamina = 2;
+                power = 3;
+                poise = 3;
+                guard = 2;
+                skill1 = "Shadow Umbra";
+                skill2 = "Shadowstride";
+                passive = "Festering Cuts";
+                break;
+            default:
+                player_class = "Unknown";
+                max_health = 100;
+                speed = 3;
+                stamina = 3;
+                power = 3;
+                poise = 3;
+                guard = 1;
+                skill1 = "N/A";
+                skill2 = "N/A";
+                passive = "N/A";
+                break;
+        }
     }
+    public void ModifyHealth(int amount) { current_health += amount; }
+    public void ModifySpeed(int amount) { speed += speed; }
+    public void ModifyStamina(int amount) { stamina += amount; }
+    public void ModifyPower(int amount) { power += amount; }
+    public void ModifyPoise(int amount) { poise += amount; }
+    public void ModifyGuard(int amount) { guard += amount; }
 
     private void Awake()
     {
+        // Warrior, Paladin, Wizard, Conduit, Wraith
         // starting stat total = 13
-        //SetPlayerClass("Warrior", 110, 2, 2, 4, 3, 2, "Berserk", "Cleave", "Adrenaline");
-        //SetPlayerClass("Paladin", 120, 2, 1, 3, 4, 3, "Blood Covenant", "Shield Bash", "Intervention");
-        SetPlayerClass("Wizard", 80, 3, 2, 4, 1, 2, "Arcane Aura", "Blink", "Mirrorlink");
-        //SetPlayerClass("Conduit", 90, 4, 3, 2, 2, 2, "Magfield", "Whiplash", "Spark");
-        //SetPlayerClass("Wraith", 100, 3, 2, 3, 3, 2, "Shadow Umbra", "Shadowstride", "Festering Cuts");
+        SetPlayerClass("Warrior");
         current_health = max_health;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
@@ -61,5 +126,9 @@ public class Player : MonoBehaviour
     private void Move()
     {
         // manipulate transform
+        var xpos = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        var ypos = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+
+        transform.position = transform.position + new Vector3(xpos, ypos, 0);
     }
 }

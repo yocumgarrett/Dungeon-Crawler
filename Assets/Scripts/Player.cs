@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public int speed_coefficient;
 
     [Header("Stats")]
     public int max_health;
@@ -14,6 +15,13 @@ public class Player : MonoBehaviour
     public int power;
     public int poise;
     public int guard;
+
+    public int GetHealth() { return max_health; }
+    public int GetSpeed() { return speed; }
+    public int GetStamina() { return stamina; }
+    public int GetPower() { return power; }
+    public int GetPoise() { return poise; }
+    public int GetGuard() { return guard; }
 
     [Header("Attributes")]
     public string player_class;
@@ -127,10 +135,10 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        // manipulate transform
-        var xpos = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        var ypos = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        // manipulate rigidbody 2D velocity
+        var x_velocity = Input.GetAxis("Horizontal") * speed * speed_coefficient * Time.deltaTime;
+        var y_velocity = Input.GetAxis("Vertical") * speed * speed_coefficient * Time.deltaTime;
 
-        transform.position = transform.position + new Vector3(xpos, ypos, 0);
+        rb.velocity = new Vector2(x_velocity, y_velocity);
     }
 }

@@ -96,8 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb7c2746b6775d48abab072135f7cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  speed_coefficient: 200
   max_health: 0
   current_health: 0
   speed: 0
@@ -110,6 +108,9 @@ MonoBehaviour:
   skill2: 
   passive: 
   currency: 0
+  rb: {fileID: 0}
+  move_coefficient: 250
+  dodge_coefficient: 1
 --- !u!61 &6880522182970965620
 BoxCollider2D:
   m_ObjectHideFlags: 0

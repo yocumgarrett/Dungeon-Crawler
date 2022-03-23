@@ -8,6 +8,11 @@ public class Doors : MonoBehaviour
     public Camera mainCamera;
     public Vector3 cameraOffset;
 
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         mainCamera.transform.position = CameraTransform.position + cameraOffset;

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public int speed_coefficient;
-
     [Header("Stats")]
     public int max_health;
     public int current_health;
@@ -29,6 +26,11 @@ public class Player : MonoBehaviour
     public string skill2;
     public string passive;
     public int currency = 0;
+
+    [Header("Movement")]
+    public Rigidbody2D rb;
+    public float move_coefficient;
+    public float dodge_coefficient;
 
     public void SetPlayerClass(string _class)
     {
@@ -128,17 +130,33 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
+        //Dodge();
     }
 
     private void Move()
     {
         // manipulate rigidbody 2D velocity
-        var x_velocity = Input.GetAxis("Horizontal") * speed * speed_coefficient * Time.deltaTime;
-        var y_velocity = Input.GetAxis("Vertical") * speed * speed_coefficient * Time.deltaTime;
+        var x_direction = Input.GetAxisRaw("Horizontal");
+        var y_direction = Input.GetAxisRaw("Vertical");
 
-        rb.velocity = new Vector2(x_velocity, y_velocity);
+        rb.velocity = speed * move_coefficient * Time.deltaTime * new Vector2(x_direction, y_direction).normalized;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var current_velocity = rb.velocity;
+            rb.velocity *= stamina * dodge_coefficient;
+        }
+    }
+
+    private void Dodge()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var current_velocity = rb.velocity;
+            rb.velocity *= stamina * dodge_coefficient;
+        }
     }
 }

@@ -15,16 +15,15 @@ public class PlayerUI : MonoBehaviour
 
     void Update()
     {
-
+        //use an event to update stats text when a stat is changed
     }
 
     public void SetStatsText()
     {
-        CurrentStatsText.text = "health " + playerClass.health +
-                                "\nspeed " + playerClass.speed +
+        CurrentStatsText.text = "speed   "   + playerClass.speed +
                                 "\nstamina " + playerClass.stamina +
-                                "\npower " + playerClass.power +
-                                "\npoise " + playerClass.poise +
-                                "\nguard " + playerClass.guard;
+                                "\npower   " + playerClass.power +
+                                "\npoise   " + playerClass.poise +
+                                "\nguard   " + playerClass.guard;
     }
 }

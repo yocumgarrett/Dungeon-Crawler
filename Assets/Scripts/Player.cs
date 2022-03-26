@@ -5,123 +5,51 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Stats")]
-    public int max_health;
-    public int current_health;
-    public int speed;
-    public int stamina;
-    public int power;
-    public int poise;
-    public int guard;
+    public float max_health;
+    public float current_health;
+    public float speed;
+    public float stamina;
+    public float power;
+    public float poise;
+    public float guard;
 
-    public int GetHealth() { return max_health; }
-    public int GetSpeed() { return speed; }
-    public int GetStamina() { return stamina; }
-    public int GetPower() { return power; }
-    public int GetPoise() { return poise; }
-    public int GetGuard() { return guard; }
+    public float GetHealth() { return max_health; }
+    public float GetSpeed() { return speed; }
+    public float GetStamina() { return stamina; }
+    public float GetPower() { return power; }
+    public float GetPoise() { return poise; }
+    public float GetGuard() { return guard; }
 
     [Header("Attributes")]
-    public string player_class;
+    public PlayerClass playerClass;
+    public string passive;
     public string skill1;
     public string skill2;
-    public string passive;
-    public int currency = 0;
 
     [Header("Movement")]
     public Rigidbody2D rb;
     public float move_coefficient;
     public float dodge_coefficient;
 
-    public void SetPlayerClass(string _class)
+    public void SetPlayerClass(PlayerClass playerClass)
     {
-        switch (_class)
-        {
-            case "Warrior":
-                player_class = _class;
-                max_health = 110;
-                speed = 2;
-                stamina = 2;
-                power = 4;
-                poise = 3;
-                guard = 2;
-                skill1 = "Berserk";
-                skill2 = "Cleave";
-                passive = "Adrenaline";
-                break;
-            case "Paladin":
-                player_class = _class;
-                max_health = 120;
-                speed = 2;
-                stamina = 1;
-                power = 3;
-                poise = 4;
-                guard = 3;
-                skill1 = "Blood Covenant";
-                skill2 = "Shield Bash";
-                passive = "Intervention";
-                break;
-            case "Wizard":
-                player_class = _class;
-                max_health = 80;
-                speed = 3;
-                stamina = 2;
-                power = 4;
-                poise = 1;
-                guard = 2;
-                skill1 = "Arcane Aura";
-                skill2 = "Blink";
-                passive = "Mirrorlink";
-                break;
-            case "Conduit":
-                player_class = _class;
-                max_health = 90;
-                speed = 4;
-                stamina = 3;
-                power = 2;
-                poise = 2;
-                guard = 2;
-                skill1 = "Magfield";
-                skill2 = "Whiplash";
-                passive = "Spark";
-                break;
-            case "Wraith":
-                player_class = _class;
-                max_health = 100;
-                speed = 3;
-                stamina = 2;
-                power = 3;
-                poise = 3;
-                guard = 2;
-                skill1 = "Shadow Umbra";
-                skill2 = "Shadowstride";
-                passive = "Festering Cuts";
-                break;
-            default:
-                player_class = "Unknown";
-                max_health = 100;
-                speed = 3;
-                stamina = 3;
-                power = 3;
-                poise = 3;
-                guard = 1;
-                skill1 = "N/A";
-                skill2 = "N/A";
-                passive = "N/A";
-                break;
-        }
+        max_health = playerClass.health;
+        speed = playerClass.speed;
+        stamina = playerClass.stamina;
+        power = playerClass.power;
+        poise = playerClass.poise;
+        guard = playerClass.guard;
+
+        passive = playerClass.passive;
+        skill1 = playerClass.skill1;
+        skill2 = playerClass.skill2;
     }
-    public void ModifyHealth(int amount) { current_health += amount; }
-    public void ModifySpeed(int amount) { speed += speed; }
-    public void ModifyStamina(int amount) { stamina += amount; }
-    public void ModifyPower(int amount) { power += amount; }
-    public void ModifyPoise(int amount) { poise += amount; }
-    public void ModifyGuard(int amount) { guard += amount; }
 
     private void Awake()
     {
         // Warrior, Paladin, Wizard, Conduit, Wraith
         // starting stat total = 13
-        SetPlayerClass("Warrior");
+        SetPlayerClass(playerClass);
         current_health = max_health;
     }
 

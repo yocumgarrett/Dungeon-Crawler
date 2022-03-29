@@ -8,4 +8,6 @@ public class RoomTemplates : MonoBehaviour
     public GameObject[] R;
     public GameObject[] B;
     public GameObject[] L;
+
+    public GameObject Wall;
 }

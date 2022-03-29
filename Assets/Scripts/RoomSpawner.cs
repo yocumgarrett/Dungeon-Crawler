@@ -13,7 +13,7 @@ public class RoomSpawner : MonoBehaviour
     private void Start()
     {
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-        Invoke("SpawnRoom", 0.1f);
+        Invoke("SpawnRoom", 0.2f);
     }
 
     private void SpawnRoom()
@@ -54,8 +54,10 @@ public class RoomSpawner : MonoBehaviour
             if(other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
             {
                 // spawn walls to block openings
+                Instantiate(templates.Wall, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
+            spawned = true;
         }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6880522182970965620}
   - component: {fileID: 6880522182970965624}
   - component: {fileID: 8866256359296227626}
+  - component: {fileID: -7119512348656743207}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -143,17 +144,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb7c2746b6775d48abab072135f7cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_health: 0
   current_health: 0
-  speed: 0
-  stamina: 0
-  power: 0
-  poise: 0
-  guard: 0
   playerClass: {fileID: 11400000, guid: 808e98d9e5321a746abbe8dc7802caa3, type: 2}
-  passive: 
-  skill1: 
-  skill2: 
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  dashingColor: {r: 1, g: 1, b: 1, a: 0.54509807}
+  attackColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &-7119512348656743207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880522182970965621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9465df22b3a06b43b1ad032232aa24a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   rb: {fileID: 6880522182970965624}
-  move_coefficient: 150
-  dodge_coefficient: 2
+  playerClass: {fileID: 11400000, guid: 808e98d9e5321a746abbe8dc7802caa3, type: 2}

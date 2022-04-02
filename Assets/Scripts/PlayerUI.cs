@@ -10,6 +10,8 @@ public class PlayerUI : MonoBehaviour
     public TextMeshProUGUI CurrentStatsText;
 
     public GameObject[] DirectionalUI;
+    public GameObject AttackUI;
+    public GameObject DashUI;
     public Color defaultColor;
     public Color pressedColor;
 
@@ -49,6 +51,22 @@ public class PlayerUI : MonoBehaviour
         }
         else
             DirectionalUI[3].GetComponent<Image>().color = defaultColor;
+        if (Input.GetKey(KeyCode.Z) || Input.GetMouseButton(0))
+        {
+            DashUI.GetComponent<Image>().color = pressedColor;
+        }
+        else
+        {
+            DashUI.GetComponent<Image>().color = defaultColor;
+        }
+        if (Input.GetKey(KeyCode.X) || Input.GetMouseButton(1))
+        {
+            AttackUI.GetComponent<Image>().color = pressedColor;
+        }
+        else
+        {
+            AttackUI.GetComponent<Image>().color = defaultColor;
+        }
     }
 
     public void SetStatsText()

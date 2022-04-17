@@ -51,13 +51,17 @@ public class RoomSpawner : MonoBehaviour
     {
         if(other.CompareTag("SpawnPoint"))
         {
-            if(other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
+            var otherSpawner = other.GetComponent<RoomSpawner>();
+            if(otherSpawner != null)
             {
-                // spawn walls to block openings
-                Instantiate(templates.Wall, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
+                {
+                    // spawn walls to block openings
+                    Instantiate(templates.Wall, transform.position, Quaternion.identity);
+                    Destroy(gameObject);
+                }
+                spawned = true;
             }
-            spawned = true;
         }
     }
 }

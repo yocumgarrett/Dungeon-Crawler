@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
         ProcessInputs();
     }
 
-    // FixedUpdate called before each internal physics update
+    // FixedUpdate called before each internal physics update 
     private void FixedUpdate()
     {
         // Physics Calculations   

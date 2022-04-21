@@ -15,6 +15,19 @@ public class PlayerUI : MonoBehaviour
     public Color defaultColor;
     public Color pressedColor;
 
+    public TextMeshProUGUI EnergyText;
+    public int energyCount;
+
+    private void OnEnable()
+    {
+        Energy.OnEnergyCollected += UpdateEnergyText;
+    }
+
+    private void OnDisable()
+    {
+        Energy.OnEnergyCollected -= UpdateEnergyText;
+    }
+
     void Start()
     {
         SetStatsText();
@@ -62,5 +75,11 @@ public class PlayerUI : MonoBehaviour
                                 "\npower   " + playerClass.power +
                                 "\npoise   " + playerClass.poise +
                                 "\nguard   " + playerClass.guard;
+    }
+
+    public void UpdateEnergyText()
+    {
+        energyCount++;
+        EnergyText.text = "energy: " + energyCount;
     }
 }

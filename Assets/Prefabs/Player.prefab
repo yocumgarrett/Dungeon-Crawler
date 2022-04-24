@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   current_health: 0
+  health: {fileID: 11400000, guid: d829f41327d7aa646b47cea79332047a, type: 2}
   playerClass: {fileID: 11400000, guid: 808e98d9e5321a746abbe8dc7802caa3, type: 2}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   dashingColor: {r: 1, g: 1, b: 1, a: 0.54509807}

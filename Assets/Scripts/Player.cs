@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [Header("Stats")]
     public float current_health;
+    public FloatVariable health;
 
     [Header("Attributes")]
     public PlayerClass playerClass;
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         current_health = playerClass.health;
+        health.value = playerClass.health;
     }
 
     void Start()

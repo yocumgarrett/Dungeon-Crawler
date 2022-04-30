@@ -1159,7 +1159,7 @@ MonoBehaviour:
   defaultColor: {r: 0, g: 0, b: 0, a: 1}
   pressedColor: {r: 1, g: 1, b: 1, a: 1}
   EnergyText: {fileID: 1409596259}
-  energyCount: 0
+  energyCount: {fileID: 11400000, guid: fbc792218f031c4489d50b7bbcfcc5ef, type: 2}
 --- !u!1 &1180919157
 GameObject:
   m_ObjectHideFlags: 0

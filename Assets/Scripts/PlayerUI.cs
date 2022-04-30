@@ -16,7 +16,7 @@ public class PlayerUI : MonoBehaviour
     public Color pressedColor;
 
     public TextMeshProUGUI EnergyText;
-    public int energyCount;
+    public FloatVariable energyCount;
 
     private void OnEnable()
     {
@@ -26,6 +26,11 @@ public class PlayerUI : MonoBehaviour
     private void OnDisable()
     {
         Energy.OnEnergyCollected -= UpdateEnergyText;
+    }
+
+    private void Awake()
+    {
+        energyCount.value = 0f;
     }
 
     void Start()
@@ -79,7 +84,7 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateEnergyText()
     {
-        energyCount++;
-        EnergyText.text = "energy: " + energyCount;
+        energyCount.value++;
+        EnergyText.text = "energy: " + energyCount.value;
     }
 }

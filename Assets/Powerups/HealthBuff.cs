@@ -9,6 +9,11 @@ public class HealthBuff : PowerupEffect
 
     public override void Apply(GameObject target)
     {
-        target.GetComponent<Player>().health.value += amount;
+        if(target.GetComponent<Player>() != null)
+        {
+            float clamp_health = target.GetComponent<Player>().Health.value;
+            clamp_health = Mathf.Clamp(clamp_health + amount, 0, target.GetComponent<Player>().MaxHealth.value);
+            target.GetComponent<Player>().Health.value = clamp_health;
+        }
     }
 }

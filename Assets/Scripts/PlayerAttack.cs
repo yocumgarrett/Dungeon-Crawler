@@ -16,7 +16,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if(timeBetweenAttack <= 0)
         {
-            if (Input.GetKey(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 // create an array of enemies in the collider area that you can damage
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
@@ -24,9 +24,9 @@ public class PlayerAttack : MonoBehaviour
                 {
                     //deal damage
                     enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
-                }  
+                }
+                timeBetweenAttack = startTimeBetweenAttack;
             }
-            timeBetweenAttack = startTimeBetweenAttack;
         }
         else
         {

@@ -245,8 +245,8 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 256
-  attackRange: 0.33
-  damage: 5
+  attackRange: 0.4
+  damage: 4
 --- !u!1 &7952118460755048809
 GameObject:
   m_ObjectHideFlags: 0

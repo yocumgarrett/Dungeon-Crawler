@@ -9,17 +9,23 @@ public class PlayerAttack : MonoBehaviour
 
     public Transform attackPos;
     public LayerMask whatIsEnemies;
-    public float attackRange;
+    public FloatVariable attackRange;
+    public float defaultAttackRange = 0.4f;
     public int damage;
+
+    void Start()
+    {
+        attackRange.value = defaultAttackRange;
+    }
 
     void Update()
     {
         if(timeBetweenAttack <= 0)
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetMouseButtonDown(0))
             {
                 // create an array of enemies in the collider area that you can damage
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange.value, whatIsEnemies);
                 for(int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     //deal damage
@@ -37,6 +43,6 @@ public class PlayerAttack : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPos.position, attackRange);
+        Gizmos.DrawWireSphere(attackPos.position, attackRange.value);
     }
 }

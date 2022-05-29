@@ -9,6 +9,13 @@ public class PlayerUI : MonoBehaviour
     public PlayerClass playerClass;
     public TextMeshProUGUI CurrentStatsText;
 
+    public TextMeshProUGUI AttackRangeText;
+    public TextMeshProUGUI MaxHealthText;
+    public TextMeshProUGUI CurrentHealthText;
+    public FloatVariable AttackRange;
+    public FloatVariable MaxHealth;
+    public FloatVariable CurrentHealth;
+
     public GameObject[] DirectionalUI;
     public GameObject AttackUI;
     public GameObject DashUI;
@@ -21,11 +28,15 @@ public class PlayerUI : MonoBehaviour
     private void OnEnable()
     {
         Energy.OnEnergyCollected += UpdateEnergyText;
+        MaxHealthBuff.OnMaxHealthBuffCollected += UpdateMaxHealthText;
+        MeleeRangeBuff.OnAttackRangeBuffCollected += UpdateAttackRangeText;
     }
 
     private void OnDisable()
     {
         Energy.OnEnergyCollected -= UpdateEnergyText;
+        MaxHealthBuff.OnMaxHealthBuffCollected -= UpdateMaxHealthText;
+        MeleeRangeBuff.OnAttackRangeBuffCollected -= UpdateAttackRangeText;
     }
 
     private void Awake()
@@ -80,11 +91,26 @@ public class PlayerUI : MonoBehaviour
                                 "\npower   " + playerClass.power +
                                 "\npoise   " + playerClass.poise +
                                 "\nguard   " + playerClass.guard;
+
+        AttackRangeText.text = "melee radius: " + AttackRange.value;
+        MaxHealthText.text = "max health: " + MaxHealth.value;
+        CurrentHealthText.text = "current health: " + CurrentHealth.value;
     }
 
     public void UpdateEnergyText()
     {
         energyCount.value++;
         EnergyText.text = "energy: " + energyCount.value;
+    }
+
+    public void UpdateMaxHealthText()
+    {
+        MaxHealthText.text = "max health: " + MaxHealth.value;
+        CurrentHealthText.text = "current health: " + CurrentHealth.value;
+    }
+
+    public void UpdateAttackRangeText()
+    {
+        AttackRangeText.text = "melee radius: " + AttackRange.value;
     }
 }

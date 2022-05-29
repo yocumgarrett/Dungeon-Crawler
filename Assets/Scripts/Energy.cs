@@ -19,7 +19,7 @@ public class Energy : MonoBehaviour, ICollectible
 
     public void Collect()
     {
-        Debug.Log("energy collected");
+        //Debug.Log("energy collected");
         Destroy(gameObject);
         OnEnergyCollected?.Invoke();
     }

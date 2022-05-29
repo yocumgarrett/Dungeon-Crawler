@@ -14,11 +14,12 @@ public class AttackPosition : MonoBehaviour
         //Debug.Log(mousePos);
         
         Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y).normalized;
-        Debug.Log(direction);
+        //Debug.Log(direction);
 
         Vector3 attackPosition = direction * radius;
         attackPositionObject.transform.position = transform.position + attackPosition;
         //attackPositionObject.transform.rotation = Quaternion.Euler(attackPosition.x, attackPosition.y, attackPosition.z);
-        //attackPositionObject.transform.rotation = Quaternion.Euler(attackPosition.x, attackPosition.y, attackPosition.x + attackPosition.y);
+        //attackPositionObject.transform.rotation = Quaternion.Euler(0,0, attackPosition.x + attackPosition.y);
+        //attackPositionObject.transform.rotation = Quaternion.LookRotation(attackPosition);
     }
 }

@@ -30,6 +30,7 @@ public class PlayerUI : MonoBehaviour
         Energy.OnEnergyCollected += UpdateEnergyText;
         MaxHealthBuff.OnMaxHealthBuffCollected += UpdateMaxHealthText;
         MeleeRangeBuff.OnAttackRangeBuffCollected += UpdateAttackRangeText;
+        Player.OnPlayerHit += UpdateMaxHealthText;
     }
 
     private void OnDisable()
@@ -37,6 +38,7 @@ public class PlayerUI : MonoBehaviour
         Energy.OnEnergyCollected -= UpdateEnergyText;
         MaxHealthBuff.OnMaxHealthBuffCollected -= UpdateMaxHealthText;
         MeleeRangeBuff.OnAttackRangeBuffCollected -= UpdateAttackRangeText;
+        Player.OnPlayerHit -= UpdateMaxHealthText;
     }
 
     private void Awake()

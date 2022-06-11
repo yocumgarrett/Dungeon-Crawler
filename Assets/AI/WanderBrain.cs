@@ -20,9 +20,7 @@ public class WanderBrain : Brain
             Vector2 randomDirection = new Vector2(2 * Random.value - 1, 2 * Random.value - 1);
             randomDirection = distance * randomDirection.normalized;
             movePosition = currentPosition + randomDirection;
-
             
-            Debug.Log("new position: " + movePosition.x + " , " + movePosition.y);
             timeBetweenUpdate = startTimeBetweenUpdate;
         }
         else

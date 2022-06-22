@@ -35,7 +35,6 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             TakeDamage(20);
-            Debug.Log(Health.value);
         }
     }
 }

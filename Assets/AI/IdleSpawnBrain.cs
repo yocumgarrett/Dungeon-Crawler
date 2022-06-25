@@ -12,6 +12,7 @@ public class IdleSpawnBrain : Brain
 
     private float timeBetweenUpdate = 0f;
     public float startTimeWait;
+    private float maxTimeNoise = .1f;
     public float maxSpawnRadius;
     private float moveRadius;
     private float curveScalar;
@@ -34,7 +35,8 @@ public class IdleSpawnBrain : Brain
 
         if(timeBetweenUpdate <= 0)
         {
-            if(target == false)
+            var movement = thinker.gameObject.GetComponent<Movement>();
+            if (target == false && movement)
             {
                 var startPoint = new Vector2(thinker.transform.position.x, thinker.transform.position.y);
                 endPoint = new Vector2(spawnPosition.x + Random.Range(-maxSpawnRadius, maxSpawnRadius), spawnPosition.y + Random.Range(-maxSpawnRadius, maxSpawnRadius));
@@ -52,7 +54,7 @@ public class IdleSpawnBrain : Brain
 
                 offsetValue = -Mathf.Pow(t - moveRadius, 2f) + moveRadius;
 
-                var movement = thinker.gameObject.GetComponent<Movement>();
+                
                 if (movement)
                 {
                     movement.MoveTowardsTarget(endPoint, offsetValue);
@@ -61,7 +63,7 @@ public class IdleSpawnBrain : Brain
             else
             {
                 t = 0;
-                timeBetweenUpdate = startTimeWait;
+                timeBetweenUpdate = Random.Range(startTimeWait, startTimeWait + maxTimeNoise);
                 target = false;
             }
 

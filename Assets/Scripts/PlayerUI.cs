@@ -29,6 +29,7 @@ public class PlayerUI : MonoBehaviour
     {
         Energy.OnEnergyCollected += UpdateEnergyText;
         MaxHealthBuff.OnMaxHealthBuffCollected += UpdateMaxHealthText;
+        HealthBuff.OnHealthBuffCollected += UpdateMaxHealthText;
         MeleeRangeBuff.OnAttackRangeBuffCollected += UpdateAttackRangeText;
         Player.OnPlayerHit += UpdateMaxHealthText;
     }
@@ -37,6 +38,7 @@ public class PlayerUI : MonoBehaviour
     {
         Energy.OnEnergyCollected -= UpdateEnergyText;
         MaxHealthBuff.OnMaxHealthBuffCollected -= UpdateMaxHealthText;
+        HealthBuff.OnHealthBuffCollected -= UpdateMaxHealthText;
         MeleeRangeBuff.OnAttackRangeBuffCollected -= UpdateAttackRangeText;
         Player.OnPlayerHit -= UpdateMaxHealthText;
     }

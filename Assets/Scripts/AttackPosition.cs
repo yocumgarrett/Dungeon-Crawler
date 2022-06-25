@@ -11,10 +11,8 @@ public class AttackPosition : MonoBehaviour
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Debug.Log(mousePos);
         
         Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y).normalized;
-        //Debug.Log(direction);
 
         Vector3 attackPosition = direction * radius;
         attackPositionObject.transform.position = transform.position + attackPosition;

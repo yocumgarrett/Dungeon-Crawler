@@ -6,19 +6,20 @@ using UnityEngine;
 public class IdleSpawnBrain : Brain
 {
     private Vector2 spawnPosition;
+    private Vector2 endPoint;
+    private Vector2 centerPoint;
     private bool spawnSet = false;
 
     private float timeBetweenUpdate = 0f;
     public float startTimeWait;
-    public float maxRadius;
-    public float max_b;
-    private float a;
-    private float b;
+    public float maxSpawnRadius;
+    private float moveRadius;
+    private float curveScalar;
+    private float offsetValue;
 
-    //private bool move = false;
+    private bool target = false;
 
-    public float speed;
-
+    private float t = 0f;
 
     public override void Think(EnemyThinker thinker)
     {
@@ -33,33 +34,41 @@ public class IdleSpawnBrain : Brain
 
         if(timeBetweenUpdate <= 0)
         {
-            // then perform next move
-            //move = true;
-            var startPoint = new Vector2(thinker.transform.position.x, thinker.transform.position.y);
-            var endPoint = new Vector2(spawnPosition.x + Random.Range(-maxRadius, maxRadius), spawnPosition.y + Random.Range(-maxRadius, maxRadius));
-            b = Random.Range(-max_b, max_b);
-            var directDistance = Vector2.Distance(startPoint, endPoint);
-            a = directDistance / 2;
-            //centerPoint
+            if(target == false)
+            {
+                var startPoint = new Vector2(thinker.transform.position.x, thinker.transform.position.y);
+                endPoint = new Vector2(spawnPosition.x + Random.Range(-maxSpawnRadius, maxSpawnRadius), spawnPosition.y + Random.Range(-maxSpawnRadius, maxSpawnRadius));
+                moveRadius = Vector2.Distance(startPoint, endPoint) / 2;
+                centerPoint = (startPoint + endPoint) / 2;
+                curveScalar = Random.Range(moveRadius / 2, moveRadius);
+                target = true;
+                //Debug.Log(endPoint + " -- " + moveRadius);
+            }
+            
+            // keep moving until distance between object and target is basically 0;
+            if(t <= 2 * moveRadius)
+            {
+                t += Time.deltaTime;
 
-            timeBetweenUpdate = startTimeWait;
+                offsetValue = -Mathf.Pow(t - moveRadius, 2f) + moveRadius;
+
+                var movement = thinker.gameObject.GetComponent<Movement>();
+                if (movement)
+                {
+                    movement.MoveTowardsTarget(endPoint, offsetValue);
+                }
+            }
+            else
+            {
+                t = 0;
+                timeBetweenUpdate = startTimeWait;
+                target = false;
+            }
+
+            
         }
         else
             timeBetweenUpdate -= Time.deltaTime;
     }
 
-    // startPoint = currentPosition
-    // 1. endPoint = randomly selected point in spawn radius
-    // 2. curveScalar = randomly selected, gives how much ellipse path will curve (b) of y = bsint
-    // 3. calculate direct distance between start and end
-    // 4. a = distance / 2
-    // 5. centerPoint = midpoint between start and end
-    private void EllipsePath(Vector2 centerPoint, float a, float b, float time, Vector2 endPoint)
-    {
-        // 6. calculate new position as 
-        //    newPosition = centerPoint position + (x = acost, y = bsint)
-        // 7. move to this new position until reach endPoint.
-        //    if (newPosition == endPoint) or (newPosition - endPoint < some small value)
-        //      stop moving, move = false;
-    }
 }

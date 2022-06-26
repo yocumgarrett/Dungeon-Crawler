@@ -29,7 +29,9 @@ public class PlayerAttack : MonoBehaviour
                 for(int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     //deal damage
-                    enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
+                    var enemyHealth = enemiesToDamage[i].GetComponent<EnemyHealth>();
+                    if(enemyHealth)
+                        enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
                 }
                 timeBetweenAttack = startTimeBetweenAttack;
             }

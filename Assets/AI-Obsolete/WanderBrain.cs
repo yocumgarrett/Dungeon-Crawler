@@ -31,7 +31,7 @@ public class WanderBrain : Brain
         var movement = thinker.gameObject.GetComponent<Movement>();
         if (movement)
         {
-            movement.MoveTowardsTarget(movePosition);
+            movement.MoveTowardsTarget(movePosition, new Vector2(0, 0));
         }
     }
 }

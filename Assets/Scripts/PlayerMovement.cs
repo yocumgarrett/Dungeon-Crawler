@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     public PlayerClass playerClass;
+    public float speedScalar;
 
     private Vector2 moveDirection;
     Vector3 mousePos;
@@ -42,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = playerClass.speed * new Vector2(moveDirection.x, moveDirection.y);
+        rb.velocity = speedScalar * playerClass.speed * new Vector2(moveDirection.x, moveDirection.y);
     }
 
     private void Flip()

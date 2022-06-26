@@ -15,7 +15,7 @@ public class ChaseBrain : Brain
             var movement = thinker.gameObject.GetComponent<Movement>();
             if (movement)
             {
-                movement.MoveTowardsTarget(target.transform.position);
+                movement.MoveTowardsTarget(target.transform.position, new Vector2(0, 0));
             }
         }
     }

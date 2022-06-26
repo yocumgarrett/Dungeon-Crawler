@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb;
     public float speed;
     private Vector2 offsetVector;
+    private Vector2 zeroVector = new Vector2(0, 0);
     Vector3 scaleVector;
     Vector2 spawnPosition;
     public Vector2 GetSpawnPosition() { return spawnPosition; }
@@ -17,13 +18,12 @@ public class Movement : MonoBehaviour
         spawnPosition = gameObject.transform.position;
     }
 
-    public void MoveTowardsTarget(Vector2 targetPosition, float offset = 0f)
+    public void MoveTowardsTarget(Vector2 targetPosition, Vector2 offsetVector)
     {
-        offsetVector = new Vector2(offset, offset);
-        var offsetTarget = targetPosition + offsetVector;
-        transform.position = Vector2.MoveTowards(transform.position, offsetTarget, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        rb.velocity = offsetVector;
 
-        float horizontalDirection = transform.position.x - offsetTarget.x;
+        float horizontalDirection = transform.position.x - targetPosition.x;
         FlipSprite(horizontalDirection);
     }
 

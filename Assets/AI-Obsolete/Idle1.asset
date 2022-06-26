@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb507486aaa6ec943b2b3fccbd6aed0d, type: 3}
   m_Name: Idle1
   m_EditorClassIdentifier: 
-  startTimeWait: 3
+  startTimeWait: 1
   maxSpawnRadius: 1.5

@@ -12,12 +12,18 @@ public class AttackPosition : MonoBehaviour
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
-        Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y).normalized;
+        Vector3 direction = new Vector3(mousePos.x - transform.position.x, mousePos.y - transform.position.y, 0).normalized;
 
         Vector3 attackPosition = direction * radius;
         attackPositionObject.transform.position = transform.position + attackPosition;
-        //attackPositionObject.transform.rotation = Quaternion.Euler(attackPosition.x, attackPosition.y, attackPosition.z);
-        //attackPositionObject.transform.rotation = Quaternion.Euler(0,0, attackPosition.x + attackPosition.y);
-        //attackPositionObject.transform.rotation = Quaternion.LookRotation(attackPosition);
+
+        float directionAngle = CalculateDirectionAngle(direction);
+        attackPositionObject.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, directionAngle));
     }
+
+    private float CalculateDirectionAngle(Vector3 direction)
+    {
+        return ( Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg ) - 90f;
+    }
+    
 }

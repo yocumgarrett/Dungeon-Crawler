@@ -7,19 +7,20 @@ public class Energy : MonoBehaviour, ICollectible
 {
     public static event Action OnEnergyCollected;
     Rigidbody2D rb;
+    public float spawnForceScalar = 10f;
 
     bool hasTarget;
     Vector3 targetPosition;
-    float moveSpeed = 4f;
+    public float moveSpeed = 2f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        BurstOnSpawn();
     }
 
     public void Collect()
     {
-        //Debug.Log("energy collected");
         Destroy(gameObject);
         OnEnergyCollected?.Invoke();
     }
@@ -37,5 +38,13 @@ public class Energy : MonoBehaviour, ICollectible
     {
         targetPosition = position;
         hasTarget = true;
+    }
+
+    private void BurstOnSpawn()
+    {
+        float spawnDirectionX = 2 * UnityEngine.Random.Range(0f, 1f) - 1;
+        float spawnDirectionY = 2 * UnityEngine.Random.Range(0f, 1f) - 1;
+        Vector2 spawnBurstForce = new Vector2(spawnDirectionX, spawnDirectionY) * spawnForceScalar;
+        rb.AddForce(spawnBurstForce);
     }
 }

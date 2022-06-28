@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 553333384477861091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.77, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -113,7 +113,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1fe1e1ecd8096a43ad36e3369fd6ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnForceScalar: 10
   moveSpeed: 2
+  energySprites:
+  - {fileID: -7213742777133032008, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: 6358044271506398449, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: 6060072699007671174, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: 1941271771715160555, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: 1675206101249883660, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: -8443895652006691878, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: 6745638694657890529, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: -4563343261249443085, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: -8824724080690144785, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: 45668334784834267, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: -8282507010017456318, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: -8610642279683931394, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: -7833898213504296929, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: -1476358984915741622, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: -2632947433959463673, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  - {fileID: 2426846697008954118, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
 --- !u!50 &5720970840334079943
 Rigidbody2D:
   serializedVersion: 4

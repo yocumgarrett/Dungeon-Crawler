@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private float timeBetweenAttack;
-    public float startTimeBetweenAttack;
+    private float timeBetweenMeleeAttack;
+    public float startTimeBetweenMeleeAttack;
+    public int meleeDamage;
+
+    private float timeBetweenProjectile;
+    public float startTimeBetweenProjectile;
+    public int projectileDamage;
+    // can I put the class based projectile in the class object?
+    public GameObject Projectile;
+
 
     public Transform attackPos;
     public LayerMask whatIsEnemies;
     public FloatVariable attackRange;
     public float defaultAttackRange = 0.4f;
-    public int damage;
 
     void Start()
     {
@@ -20,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if(timeBetweenAttack <= 0)
+        if(timeBetweenMeleeAttack <= 0)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -31,20 +38,40 @@ public class PlayerAttack : MonoBehaviour
                     //deal damage
                     var enemyHealth = enemiesToDamage[i].GetComponent<EnemyHealth>();
                     if(enemyHealth)
-                        enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
+                        enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(meleeDamage);
                 }
-                timeBetweenAttack = startTimeBetweenAttack;
+                timeBetweenMeleeAttack = startTimeBetweenMeleeAttack;
             }
         }
         else
+            timeBetweenMeleeAttack -= Time.deltaTime;
+
+        if (timeBetweenProjectile <= 0)
         {
-            timeBetweenAttack -= Time.deltaTime;
+            if (Input.GetMouseButtonDown(1))
+                SpawnProjectile();
         }
+        else
+            timeBetweenProjectile -= Time.deltaTime;
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange.value);
+    }
+
+    private void SpawnProjectile()
+    {
+        GameObject spawnedProjectile = Instantiate(Projectile, transform.position, Quaternion.identity);
+        var projectile = spawnedProjectile.GetComponent<Projectile>();
+        if (projectile)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 direction = new Vector3(mousePos.x - transform.position.x, mousePos.y - transform.position.y, 0).normalized;
+            projectile.ShootProjectile(direction);
+        }
+
+        timeBetweenProjectile = startTimeBetweenProjectile;
     }
 }

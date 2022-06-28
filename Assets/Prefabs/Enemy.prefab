@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 718381657828118461}
   - component: {fileID: 718381657828118462}
-  - component: {fileID: 718381657828118449}
+  - component: {fileID: 4050775287127389861}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &718381657828118449
+--- !u!50 &4050775287127389861
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0

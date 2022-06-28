@@ -13,9 +13,12 @@ public class Energy : MonoBehaviour, ICollectible
     Vector3 targetPosition;
     public float moveSpeed = 2f;
 
+    public Sprite[] energySprites;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        SetSpriteOnSpawn();
         BurstOnSpawn();
     }
 
@@ -38,6 +41,13 @@ public class Energy : MonoBehaviour, ICollectible
     {
         targetPosition = position;
         hasTarget = true;
+    }
+
+    private void SetSpriteOnSpawn()
+    {
+        var numSprites = energySprites.Length;
+        int spriteIndex = UnityEngine.Random.Range(0, numSprites - 1);
+        gameObject.GetComponent<SpriteRenderer>().sprite = energySprites[spriteIndex];
     }
 
     private void BurstOnSpawn()

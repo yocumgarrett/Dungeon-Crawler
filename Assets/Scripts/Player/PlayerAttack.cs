@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public static event Action OnAttack;
+
     private float timeBetweenMeleeAttack;
     public float startTimeBetweenMeleeAttack;
     public int meleeDamage;
@@ -41,6 +44,7 @@ public class PlayerAttack : MonoBehaviour
                         enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(meleeDamage);
                 }
                 timeBetweenMeleeAttack = startTimeBetweenMeleeAttack;
+                OnAttack?.Invoke();
             }
         }
         else
@@ -49,7 +53,10 @@ public class PlayerAttack : MonoBehaviour
         if (timeBetweenProjectile <= 0)
         {
             if (Input.GetMouseButtonDown(1))
+            {
                 SpawnProjectile();
+                OnAttack?.Invoke();
+            }
         }
         else
             timeBetweenProjectile -= Time.deltaTime;

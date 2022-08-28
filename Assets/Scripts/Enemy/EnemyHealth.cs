@@ -20,10 +20,15 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 knockback)
     {
-        Debug.Log("oof!");
         health -= damage;
+        var enemyAI = GetComponentInParent<EnemyAI>();
+        if (enemyAI)
+        {
+
+            enemyAI.rb.AddForce(knockback);
+        }
     }
 
     public void SpawnEnergyOnDeath(Vector3 pos)

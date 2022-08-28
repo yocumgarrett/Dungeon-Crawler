@@ -9,7 +9,6 @@ public class CameraManager : MonoBehaviour
     public string player_tag;
 
 
-
     private void OnEnable()
     {
         PlayerAttack.OnAttack += ShakeCamera;
@@ -18,6 +17,11 @@ public class CameraManager : MonoBehaviour
     private void OnDisable()
     {
         PlayerAttack.OnAttack -= ShakeCamera;
+    }
+
+    private void Start()
+    {
+        
     }
 
     void Update()
@@ -38,23 +42,21 @@ public class CameraManager : MonoBehaviour
     public void ShakeCamera()
     {
 
-        StartCoroutine(Shake(0.15f, 0.02f));
+        StartCoroutine(Shake(0.1f, 0.015f));
     }
 
     public IEnumerator Shake(float duration, float magnitude)
     {
-        Vector3 originalPosition = transform.position;
         float elapsed = 0f;
 
         while(elapsed < duration)
         {
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
-            transform.position = originalPosition + new Vector3(x, y, -10f);
+            transform.position += new Vector3(x, y, -10f);
 
             elapsed += Time.deltaTime;
             yield return 0;
         }
-        transform.position = originalPosition;
     }
 }

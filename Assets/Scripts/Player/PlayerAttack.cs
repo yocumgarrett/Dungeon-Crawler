@@ -22,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask whatIsEnemies;
     public FloatVariable attackRange;
     public float defaultAttackRange = 0.4f;
+    public float knockback = 1f;
 
     void Start()
     {
@@ -38,10 +39,12 @@ public class PlayerAttack : MonoBehaviour
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange.value, whatIsEnemies);
                 for(int i = 0; i < enemiesToDamage.Length; i++)
                 {
-                    //deal damage
+                    //deal damage and knockback
+                    Vector2 direction = enemiesToDamage[i].transform.position - transform.position;
+                    Vector2 knockbackVector = direction.normalized * knockback;
                     var enemyHealth = enemiesToDamage[i].GetComponent<EnemyHealth>();
                     if(enemyHealth)
-                        enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(meleeDamage);
+                        enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(meleeDamage, knockbackVector);
                 }
                 timeBetweenMeleeAttack = startTimeBetweenMeleeAttack;
                 OnAttack?.Invoke();

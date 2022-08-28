@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 718381657828118461}
   - component: {fileID: 718381657828118462}
   - component: {fileID: 4050775287127389861}
+  - component: {fileID: 1749332842477197238}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -73,7 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4044da53d8039f94c93b2760eb568990, type: 3}
+  m_Sprite: {fileID: 5265107161302433887, guid: 4f9698eb636a1504fb99628c754181a3,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,14 +99,39 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.38484508
-  m_LinearDrag: 1
-  m_AngularDrag: 1
+  m_LinearDrag: 0.5
+  m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1749332842477197238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718381657828118450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d4afe87bbf6b44c976341adf4ee22a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target_tag: Player
+  speed: 15
+  rb: {fileID: 0}
+  spriteRenderer: {fileID: 718381657828118462}
+  idleSheet:
+  - {fileID: 5265107161302433887, guid: 4f9698eb636a1504fb99628c754181a3, type: 3}
+  - {fileID: -3220260178889578747, guid: 4f9698eb636a1504fb99628c754181a3, type: 3}
+  - {fileID: 3044087572779663777, guid: 4f9698eb636a1504fb99628c754181a3, type: 3}
+  - {fileID: -5086012078264354108, guid: 4f9698eb636a1504fb99628c754181a3, type: 3}
+  - {fileID: -6350734199080555038, guid: 4f9698eb636a1504fb99628c754181a3, type: 3}
+  - {fileID: 3854925955219724842, guid: 4f9698eb636a1504fb99628c754181a3, type: 3}
+  - {fileID: 2137881658005206083, guid: 4f9698eb636a1504fb99628c754181a3, type: 3}
+  - {fileID: 1665620959240875416, guid: 4f9698eb636a1504fb99628c754181a3, type: 3}
 --- !u!1 &718381657918861797
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  minSpawnEnergy: 1
-  maxSpawnEnergy: 10
+  minSpawnEnergy: 2
+  maxSpawnEnergy: 15
   Energy: {fileID: 553333384477861091, guid: 428e78b7aecca0e43aa1be572a5bfb20, type: 3}

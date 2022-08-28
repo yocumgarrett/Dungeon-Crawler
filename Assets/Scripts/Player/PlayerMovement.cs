@@ -4,57 +4,50 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public PlayerClass playerClass;
-    public float speedScalar;
+    public float speed;
+    private Vector3 change;
+    private Rigidbody2D myRigidbody;
+    private Animator animator;
 
-    private Vector2 moveDirection;
-    Vector3 mousePos;
-    Vector3 scaleVector;
-
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
-        scaleVector = gameObject.transform.localScale;
+        myRigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Process Inputs
-        ProcessInputs();
-
-        Flip();
+        change = Vector3.zero;
+        change.x = Input.GetAxisRaw("Horizontal");
+        change.y = Input.GetAxisRaw("Vertical");
     }
 
-    // FixedUpdate called before each internal physics update 
     private void FixedUpdate()
     {
-        // Physics Calculations   
-        Move();
+        UpdateAnimationAndMove();
     }
 
-    private void ProcessInputs()
+    void UpdateAnimationAndMove()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-
-        moveDirection = new Vector2(moveX, moveY).normalized;
+        if (change != Vector3.zero)
+        {
+            MovePlayer();
+            animator.SetFloat("moveX", change.x);
+            animator.SetFloat("moveY", change.y);
+            // set up when I have walk/run animation
+            //animator.SetBool("moving", true);
+        }
+        else
+        {
+            //animator.SetBool("moving", false);
+        }
     }
 
-    private void Move()
+    private void MovePlayer()
     {
-        rb.velocity = speedScalar * playerClass.speed * new Vector2(moveDirection.x, moveDirection.y);
-    }
-
-    private void Flip()
-    {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var horizontalDirection = mousePos.x - transform.position.x;
-
-        if (horizontalDirection >= 0)
-            gameObject.transform.localScale = new Vector3(Mathf.Abs(scaleVector.x), scaleVector.y, scaleVector.z);
-        
-        else if(horizontalDirection <= 0)
-            gameObject.transform.localScale = new Vector3(-Mathf.Abs(scaleVector.x), scaleVector.y, scaleVector.z);
+        myRigidbody.MovePosition(
+             transform.position + change * speed * Time.deltaTime);
     }
 }

@@ -153,10 +153,9 @@ GameObject:
   - component: {fileID: 6880522182970965626}
   - component: {fileID: 6880522182970965624}
   - component: {fileID: 8866256359296227626}
-  - component: {fileID: -7119512348656743207}
+  - component: {fileID: 416117550}
   - component: {fileID: 1785858127}
   - component: {fileID: 1473106682}
-  - component: {fileID: 1163881288}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -220,7 +219,7 @@ SpriteRenderer:
   m_SortingLayerID: -626017117
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3389253993164609370, guid: abaabcd72611be34fa78fde1b3b2acb6,
+  m_Sprite: {fileID: -8167956445505962883, guid: 61094c7d96d0b0848b3f4c67e134e6e7,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -268,7 +267,7 @@ MonoBehaviour:
   MaxHealth: {fileID: 11400000, guid: 4788fcbbdc1f27b47b394b8880f80eb5, type: 2}
   Health: {fileID: 11400000, guid: d829f41327d7aa646b47cea79332047a, type: 2}
   playerClass: {fileID: 11400000, guid: 808e98d9e5321a746abbe8dc7802caa3, type: 2}
---- !u!114 &-7119512348656743207
+--- !u!114 &416117550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -277,12 +276,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6880522182970965621}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9465df22b3a06b43b1ad032232aa24a, type: 3}
+  m_Script: {fileID: 11500000, guid: f841a300c37ee9748aeedf39e5366878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 6880522182970965624}
-  playerClass: {fileID: 11400000, guid: a09868088904f1c4f8e8fa3ccaf959e9, type: 2}
-  speedScalar: 0.4
+  speed: 1
 --- !u!114 &1785858127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +304,7 @@ MonoBehaviour:
     m_Bits: 256
   attackRange: {fileID: 11400000, guid: 4ba563a53a59cc84d81c4dce004fd79a, type: 2}
   defaultAttackRange: 0.1
+  knockback: 200
 --- !u!114 &1473106682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,25 +319,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.2
   attackPositionObject: {fileID: 1166048867}
---- !u!95 &1163881288
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6880522182970965621}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3f1c70602b1f7d94f8abf86d2d8b5ab3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7952118460755048809
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float speed;
-    public int damage;
+    public float damage;
 
     public void ShootProjectile(Vector3 direction)
     {

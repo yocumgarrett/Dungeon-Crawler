@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int health;
+    public float health;
     public int minSpawnEnergy;
     public int maxSpawnEnergy;
     public GameObject Energy;
@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage, Vector2 knockback)
+    public void TakeDamage(float damage, Vector2 knockback)
     {
         health -= damage;
         var enemyAI = GetComponentInParent<EnemyAI>();

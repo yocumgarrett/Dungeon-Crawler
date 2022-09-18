@@ -219,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   follow_player: 1
   player_tag: Player
+  smoothing: 1
 --- !u!1001 &192419932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -288,31 +289,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53f011ccd8fc77f449f9342fe69f0b22, type: 3}
---- !u!1 &416117549 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6880522182970965621, guid: de455bddf1a08404381e06ce78506b9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 709069725}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &416117557
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416117549}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3f1c70602b1f7d94f8abf86d2d8b5ab3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &709069725
 PrefabInstance:
   m_ObjectHideFlags: 0

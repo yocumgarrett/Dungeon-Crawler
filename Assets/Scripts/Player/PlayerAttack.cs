@@ -9,7 +9,9 @@ public class PlayerAttack : MonoBehaviour
 
     private float timeBetweenMeleeAttack;
     public float startTimeBetweenMeleeAttack;
-    public int meleeDamage;
+    public float meleeDamage;
+    public float critChance;
+    public float critModifier;
 
     private float timeBetweenProjectile;
     public float startTimeBetweenProjectile;
@@ -37,14 +39,16 @@ public class PlayerAttack : MonoBehaviour
             {
                 // create an array of enemies in the collider area that you can damage
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange.value, whatIsEnemies);
-                for(int i = 0; i < enemiesToDamage.Length; i++)
+                float damageModifier = CalculateDamageModifier();
+                
+                for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     //deal damage and knockback
                     Vector2 direction = enemiesToDamage[i].transform.position - transform.position;
                     Vector2 knockbackVector = direction.normalized * knockback;
                     var enemyHealth = enemiesToDamage[i].GetComponent<EnemyHealth>();
                     if(enemyHealth)
-                        enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(meleeDamage, knockbackVector);
+                        enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(meleeDamage * damageModifier, knockbackVector);
                 }
                 timeBetweenMeleeAttack = startTimeBetweenMeleeAttack;
                 OnAttack?.Invoke();
@@ -63,6 +67,18 @@ public class PlayerAttack : MonoBehaviour
         }
         else
             timeBetweenProjectile -= Time.deltaTime;
+    }
+
+    private float CalculateDamageModifier()
+    {
+        float modifier = 1f;
+
+        // critical chance
+        float critOutcome = UnityEngine.Random.value;
+        if (critOutcome >= 0 && critOutcome <= critChance)
+            modifier *= critModifier;
+
+        return modifier;
     }
 
     private void OnDrawGizmosSelected()

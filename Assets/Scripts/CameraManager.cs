@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
 
     public bool follow_player;
     public string player_tag;
+    public float smoothing;
 
 
     private void OnEnable()
@@ -24,7 +25,7 @@ public class CameraManager : MonoBehaviour
         
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (follow_player)
             FollowPlayer();
@@ -35,7 +36,9 @@ public class CameraManager : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag(player_tag);
         if (player)
         {
-            transform.position = player.transform.position + new Vector3(0, 0, -10f);
+            //transform.position = player.transform.position + new Vector3(0, 0, -10f);
+            Vector3 targetPosition = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
         }
     }
 
@@ -51,9 +54,9 @@ public class CameraManager : MonoBehaviour
 
         while(elapsed < duration)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
-            transform.position += new Vector3(x, y, -10f);
+            float shakeX = Random.Range(-1f, 1f) * magnitude;
+            float shakeY = Random.Range(-1f, 1f) * magnitude;
+            transform.position = new Vector3(transform.position.x + shakeX, transform.position.y + shakeY, transform.position.z);
 
             elapsed += Time.deltaTime;
             yield return 0;

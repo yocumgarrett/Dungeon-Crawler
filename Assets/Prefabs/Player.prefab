@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 416117550}
   - component: {fileID: 1785858127}
   - component: {fileID: 1473106682}
+  - component: {fileID: 416117557}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -294,6 +295,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTimeBetweenMeleeAttack: 0.3
   meleeDamage: 4
+  critChance: 0.1
+  critModifier: 2
   startTimeBetweenProjectile: 1
   projectileDamage: 10
   Projectile: {fileID: 2530687475535011474, guid: 25e555d614d5403429ec97e7194e30cb,
@@ -319,6 +322,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.2
   attackPositionObject: {fileID: 1166048867}
+--- !u!95 &416117557
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880522182970965621}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f1c70602b1f7d94f8abf86d2d8b5ab3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7952118460755048809
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,15 +5,27 @@ using System;
 
 public class Energy : MonoBehaviour, ICollectible
 {
-    public static event Action OnEnergyCollected;
-    Rigidbody2D rb;
-    public float spawnForceScalar = 10f;
+    enum EnergyState
+    {
+        Burst,
+        Idle,
+        Collection
+    }
+    private EnergyState state;
 
-    bool hasTarget;
+    public static event Action OnEnergyCollected;
+    public Rigidbody2D rb;
+    public Sprite[] energySprites;
     Vector3 targetPosition;
+    Vector3 idlePosition;
+    public float spawnForceScalar;
+    public float burstTimeInSeconds;
     public float moveSpeed = 2f;
 
-    public Sprite[] energySprites;
+    public float idleAmplitude;
+    public float idleSpeed;
+    private float timeSinceIdle = 0f;
+    private float yIdle;
 
     private void Awake()
     {
@@ -28,21 +40,36 @@ public class Energy : MonoBehaviour, ICollectible
         OnEnergyCollected?.Invoke();
     }
 
+    void Update()
+    {
+        if(state == EnergyState.Idle)
+        {
+            timeSinceIdle += Time.deltaTime;
+            yIdle = Mathf.Sin(timeSinceIdle * idleSpeed) * idleAmplitude;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (hasTarget)
+        // if in range of player, move towards player until destroyed.
+        if (state == EnergyState.Collection)
         {
             Vector2 targetDirection = (targetPosition - transform.position).normalized;
             rb.velocity = new Vector2(targetDirection.x, targetDirection.y) * moveSpeed;
+        }
+        else if(state == EnergyState.Idle)
+        {
+            transform.position = new Vector3(idlePosition.x, idlePosition.y + yIdle, idlePosition.z);
         }
     }
 
     public void SetTarget(Vector3 position)
     {
         targetPosition = position;
-        hasTarget = true;
+        state = EnergyState.Collection;
     }
 
+    // assign sprite from list of sprites that gives it a different color
     private void SetSpriteOnSpawn()
     {
         var numSprites = energySprites.Length;
@@ -56,5 +83,15 @@ public class Energy : MonoBehaviour, ICollectible
         float spawnDirectionY = 2 * UnityEngine.Random.Range(0f, 1f) - 1;
         Vector2 spawnBurstForce = new Vector2(spawnDirectionX, spawnDirectionY) * spawnForceScalar;
         rb.AddForce(spawnBurstForce);
+        state = EnergyState.Burst;
+        StartCoroutine(BurstCoroutine());
+    }
+
+    IEnumerator BurstCoroutine()
+    {
+        yield return new WaitForSeconds(burstTimeInSeconds);
+        state = EnergyState.Idle;
+        rb.velocity = Vector3.zero;
+        idlePosition = transform.position;
     }
 }

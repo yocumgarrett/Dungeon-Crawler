@@ -113,8 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1fe1e1ecd8096a43ad36e3369fd6ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnForceScalar: 10
-  moveSpeed: 2
+  rb: {fileID: 5720970840334079943}
   energySprites:
   - {fileID: -7213742777133032008, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
   - {fileID: 6358044271506398449, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
@@ -132,6 +131,11 @@ MonoBehaviour:
   - {fileID: -1476358984915741622, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
   - {fileID: -2632947433959463673, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
   - {fileID: 2426846697008954118, guid: 391dfdab256ced940a9702dc0aff9f67, type: 3}
+  spawnForceScalar: 80
+  burstTimeInSeconds: 0.25
+  moveSpeed: 2
+  idleAmplitude: 0.0125
+  idleSpeed: 10
 --- !u!50 &5720970840334079943
 Rigidbody2D:
   serializedVersion: 4

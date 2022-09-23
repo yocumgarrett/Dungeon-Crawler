@@ -9,25 +9,16 @@ public class EnemyHealth : MonoBehaviour
     public int maxSpawnEnergy;
     public GameObject Energy;
 
-    private void Update()
-    {
-        if (health <= 0)
-        {
-            Vector3 deathPosition = transform.parent.transform.position;
-            Destroy(transform.parent.gameObject);
-
-            SpawnEnergyOnDeath(deathPosition);
-        }
-    }
-
     public void TakeDamage(float damage, Vector2 knockback)
     {
         health -= damage;
-        var enemyAI = GetComponentInParent<EnemyAI>();
+        var enemyAI = GetComponent<EnemyAI>();
         if (enemyAI)
         {
-
-            enemyAI.rb.AddForce(knockback);
+            if (health <= 0)
+                enemyAI.Die();
+            else
+                enemyAI.TookDamage(knockback);
         }
     }
 
@@ -39,4 +30,6 @@ public class EnemyHealth : MonoBehaviour
             GameObject toSpawn = Instantiate(Energy, pos, Quaternion.identity);
         }
     }
+
+    
 }

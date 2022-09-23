@@ -4,38 +4,52 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    enum EnemyState
+    {
+        Aggro,
+        Idle,
+        HitStun,
+        Death
+    }
+    EnemyState state;
+
     bool has_target;
     bool chase;
     public string target_tag = "Player";
     public float speed = 1f;
-    public void SetChase(bool _chase) { chase = _chase; }
     public Rigidbody2D rb;
+    public CircleCollider2D bodyCollider;
+    public Animator animator;
+    private Vector2 moveDirection;
+    public float knockbackTimeInSeconds;
+    public float deathTimeInSeconds;
 
-    public SpriteRenderer spriteRenderer;
-    public Sprite[] idleSheet;
+    public int minSpawnEnergy;
+    public int maxSpawnEnergy;
+    public GameObject Energy;
 
     void Start()
     {
-        //change has_target to depend on taking damage or seeing player
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponentInParent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        bodyCollider = GetComponent<CircleCollider2D>();
+        state = EnemyState.Aggro;
         has_target = true;
         chase = true;
     }
 
     void Update()
     {
-        /*
-        if (has_target && chase)
-            ChasePlayer();
-        else
-            Idle();
-            */
+
     }
 
     private void FixedUpdate()
     {
-        if (has_target && chase)
+        if (has_target && state == EnemyState.Aggro)
+        {
             ChasePlayer();
+            UpdateAnimation();
+        }
         else
             Idle();
     }
@@ -45,7 +59,55 @@ public class EnemyAI : MonoBehaviour
         GameObject target = GameObject.FindGameObjectWithTag(target_tag);
         if (target)
         {
-            MoveTowardsTargetV2(target.transform.position);
+            MoveTowardsTarget(target.transform.position);
+        }
+    }
+
+    void UpdateAnimation()
+    {
+        if(moveDirection != Vector2.zero)
+        {
+            var angle = CalculateDirectionAngle(moveDirection);
+            if (angle >= 247.5 && angle < 292.5)
+            {
+                animator.SetFloat("moveX", 0);
+                animator.SetFloat("moveY", -1);
+            }
+            else if (angle >= 292.5 && angle < 337.5)
+            {
+                animator.SetFloat("moveX", 1);
+                animator.SetFloat("moveY", -1);
+            }
+            else if (angle >= 337.5 || angle < 22.5)
+            {
+                animator.SetFloat("moveX", 1);
+                animator.SetFloat("moveY", 0);
+            }
+            else if (angle >= 22.5 && angle < 67.5)
+            {
+                animator.SetFloat("moveX", 1);
+                animator.SetFloat("moveY", 1);
+            }
+            else if (angle >= 67.5 && angle < 112.5)
+            {
+                animator.SetFloat("moveX", 0);
+                animator.SetFloat("moveY", 1);
+            }
+            else if (angle >= 112.5 && angle < 157.5)
+            {
+                animator.SetFloat("moveX", -1);
+                animator.SetFloat("moveY", 1);
+            }
+            else if (angle >= 157.5 && angle < 202.5)
+            {
+                animator.SetFloat("moveX", -1);
+                animator.SetFloat("moveY", 0);
+            }
+            else if (angle >= 202.5 && angle < 247.5)
+            {
+                animator.SetFloat("moveX", -1);
+                animator.SetFloat("moveY", -1);
+            }
         }
     }
 
@@ -54,62 +116,57 @@ public class EnemyAI : MonoBehaviour
 
     }
 
+    public void TookDamage(Vector2 knockback)
+    {
+        rb.AddForce(knockback);
+        StartCoroutine(HitStunCoroutine());
+    }
+
+    IEnumerator HitStunCoroutine()
+    {
+        state = EnemyState.HitStun;
+        animator.SetBool("took_damage", true);
+        yield return null;
+        animator.SetBool("took_damage", false);
+        yield return new WaitForSeconds(knockbackTimeInSeconds);
+        state = EnemyState.Aggro;        
+    }
+
+    public void Die()
+    {
+        StartCoroutine(DieCoroutine());
+    }
+
+    IEnumerator DieCoroutine()
+    {
+        has_target = false;
+        rb.velocity = Vector2.zero;
+        bodyCollider.enabled = false;
+        Vector3 deathPosition = transform.parent.transform.position;
+        SpawnEnergyOnDeath(deathPosition);
+        state = EnemyState.Death;
+        animator.SetBool("die", true);
+        yield return new WaitForSeconds(deathTimeInSeconds);
+        //add phase out and instantiate head to kick around
+        Destroy(transform.parent.gameObject);
+    }
+
+    public void SpawnEnergyOnDeath(Vector3 pos)
+    {
+        var numToSpawn = Random.Range(minSpawnEnergy, maxSpawnEnergy);
+        for (var i = 0; i < numToSpawn; i++)
+        {
+            GameObject toSpawn = Instantiate(Energy, pos, Quaternion.identity);
+        }
+    }
+
     public void MoveTowardsTarget(Vector2 targetPosition)
     {
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-
-        float horizontalDirection = targetPosition.x - transform.position.x;
-        float verticalDirection = targetPosition.y - transform.position.y;
-        SelectSprite(horizontalDirection, verticalDirection);
-    }
-
-    public void MoveTowardsTargetV2(Vector2 targetPosition)
-    {
-        var direction = new Vector2(targetPosition.x - transform.position.x, targetPosition.y - transform.position.y);
+        moveDirection = new Vector2(targetPosition.x - transform.parent.transform.position.x, targetPosition.y - transform.parent.transform.position.y);
 
         if (rb)
-            rb.velocity = direction * speed * Time.deltaTime;
+            rb.velocity = moveDirection * speed * Time.deltaTime;
 
-        SelectSprite(direction.x, direction.y);
-    }
-
-    private void SelectSprite(float hDir, float vDir)
-    {
-        /*
-        if (horizontalDirection > 0)
-            gameObject.transform.localScale = new Vector3(1, 1, 1);
-        else if (horizontalDirection < 0)
-            gameObject.transform.localScale = new Vector3(-1, 1, 1);
-        */
-
-        var dir = new Vector2(hDir, vDir);
-        var angle = CalculateDirectionAngle(dir);
-
-        // 45 degree arcs +/- 22.5
-        if (angle >= 247.5 && angle < 292.5)
-            //270
-            spriteRenderer.sprite = idleSheet[0];
-        else if (angle >= 292.5 && angle < 337.5)
-            //315
-            spriteRenderer.sprite = idleSheet[1];
-        else if (angle >= 337.5 || angle < 22.5)
-            //360 / 0
-            spriteRenderer.sprite = idleSheet[2];
-        else if (angle >= 22.5 && angle < 67.5)
-            //45
-            spriteRenderer.sprite = idleSheet[3];
-        else if (angle >= 67.5 && angle < 112.5)
-            //90
-            spriteRenderer.sprite = idleSheet[4];
-        else if (angle >= 112.5 && angle < 157.5)
-            //135
-            spriteRenderer.sprite = idleSheet[5];
-        else if (angle >= 157.5 && angle < 202.5)
-            //180
-            spriteRenderer.sprite = idleSheet[6];
-        else if (angle >= 202.5 && angle < 247.5)
-            //225
-            spriteRenderer.sprite = idleSheet[7];
     }
 
     private float CalculateDirectionAngle(Vector3 direction)

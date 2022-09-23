@@ -360,8 +360,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07f89719b86e6fa45b9f73a5fb7480bc, type: 3}
 --- !u!1001 &718381657085247431
@@ -500,12 +499,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 4624169353432099111, guid: 07f89719b86e6fa45b9f73a5fb7480bc,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000,
-        type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07f89719b86e6fa45b9f73a5fb7480bc, type: 3}
 --- !u!1001 &6000268110941493939

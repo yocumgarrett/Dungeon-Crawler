@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4624169353432099109}
   - component: {fileID: -5199128714982637014}
   - component: {fileID: 4624169353432099110}
+  - component: {fileID: 4784453612098889564}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -71,8 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2632947433959463673, guid: 391dfdab256ced940a9702dc0aff9f67,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: e7048661480e3a247b2b8f4223737474, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,4 +97,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 718381657828118450, guid: 53f011ccd8fc77f449f9342fe69f0b22,
     type: 3}
-  timeBetweenSpawns: 2
+  timeBetweenSpawns: 3
+--- !u!58 &4784453612098889564
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624169353432099111}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.14

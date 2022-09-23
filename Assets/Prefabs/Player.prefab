@@ -299,7 +299,7 @@ MonoBehaviour:
   critModifier: 2
   startTimeBetweenProjectile: 1
   projectileDamage: 10
-  Projectile: {fileID: 2530687475535011474, guid: 25e555d614d5403429ec97e7194e30cb,
+  Projectile: {fileID: 2530687475535011474, guid: b0e9b1b969713e4468ed6899d497f525,
     type: 3}
   attackPos: {fileID: 1166048868}
   whatIsEnemies:
@@ -307,7 +307,7 @@ MonoBehaviour:
     m_Bits: 256
   attackRange: {fileID: 11400000, guid: 4ba563a53a59cc84d81c4dce004fd79a, type: 2}
   defaultAttackRange: 0.1
-  knockback: 200
+  knockback: 100
 --- !u!114 &1473106682
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -136,3 +136,4 @@ MonoBehaviour:
   rb: {fileID: 2530687475535011475}
   speed: 125
   damage: 10
+  hitCounter: 1

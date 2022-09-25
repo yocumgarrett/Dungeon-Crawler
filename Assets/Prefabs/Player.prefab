@@ -245,7 +245,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -281,6 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  critChance: 0.25
 --- !u!114 &1785858127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +297,8 @@ MonoBehaviour:
   startTimeBetweenMeleeAttack: 0.3
   meleeDamage: 4
   critChance: 0.1
-  critModifier: 2
+  critModifier: 3
+  crit: 0
   startTimeBetweenProjectile: 1
   projectileDamage: 10
   Projectile: {fileID: 2530687475535011474, guid: b0e9b1b969713e4468ed6899d497f525,

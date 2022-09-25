@@ -5,22 +5,31 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float speed;
+    public float moveSpeed;
+    public float rotationSpeed;
     public float damage;
+    public int hitCounter;
+    private int orientation;
+
+    private void Update()
+    {
+        transform.Rotate(0, 0, orientation *rotationSpeed);
+    }
 
     public void ShootProjectile(Vector3 direction)
     {
-        OrientSprite(direction.x);
-        rb.AddForce(direction * speed);
+        if(direction.x <= 0)
+            orientation = 1;
+        else if (direction.x > 0)
+            orientation = -1;
+        OrientSprite(orientation);
+        rb.AddForce(direction * moveSpeed);
     }
 
-    public void OrientSprite(float x)
+    public void OrientSprite(int orient)
     {
         var temp_scale = transform.localScale;
-        if (x <= 0)
-            transform.localScale = new Vector3(Mathf.Abs(temp_scale.x), temp_scale.y, temp_scale.z);
-        else if (x > 0)
-            transform.localScale = new Vector3(-Mathf.Abs(temp_scale.x), temp_scale.y, temp_scale.z);
+        transform.localScale = new Vector3(orient* Mathf.Abs(temp_scale.x), temp_scale.y, temp_scale.z);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,7 +37,13 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage, new Vector2(0, 0));
-            Destroy(gameObject);
+            --hitCounter;
+            if (hitCounter <= 0)
+            {
+                //intead of destroy, make it bounce off of something
+                Destroy(gameObject);
+            }
         }
     }
+
 }

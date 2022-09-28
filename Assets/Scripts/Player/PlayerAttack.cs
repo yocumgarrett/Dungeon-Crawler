@@ -24,6 +24,7 @@ public class PlayerAttack : MonoBehaviour
 
     public Transform attackPos;
     public LayerMask whatIsEnemies;
+    public LayerMask whatIsBreakable;
     public FloatVariable attackRange;
     public float defaultAttackRange = 0.4f;
     public float knockback = 1f;
@@ -88,8 +89,14 @@ public class PlayerAttack : MonoBehaviour
     {
         // create an array of enemies in the collider area that you can damage
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange.value, whatIsEnemies);
+        Collider2D[] breakablesToHit = Physics2D.OverlapCircleAll(attackPos.position, attackRange.value, whatIsBreakable);
         float damageModifier = CalculateDamageModifier();
-
+        for (int i = 0; i < breakablesToHit.Length; i++)
+        {
+            var destroyable = breakablesToHit[i].GetComponent<DestroyableObject>();
+            if (destroyable)
+                breakablesToHit[i].GetComponent<DestroyableObject>().TakeHit();
+        }
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
             //deal damage and knockback

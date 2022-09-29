@@ -18,7 +18,6 @@ public class PlayerAttack : MonoBehaviour
     private float timeBetweenProjectile;
     public float startTimeBetweenProjectile;
     public int projectileDamage;
-    // can I put the class based projectile in the class object?
     public GameObject Projectile;
 
 
@@ -31,12 +30,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerMovement.OnAttack += Attack;
+        Player.OnAttack += Attack;
     }
 
     private void OnDisable()
     {
-        PlayerMovement.OnAttack -= Attack;
+        Player.OnAttack -= Attack;
     }
 
     void Start()

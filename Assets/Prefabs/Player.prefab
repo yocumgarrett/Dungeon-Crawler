@@ -153,8 +153,6 @@ GameObject:
   - component: {fileID: 6880522182970965626}
   - component: {fileID: 6880522182970965624}
   - component: {fileID: 8866256359296227626}
-  - component: {fileID: 416117550}
-  - component: {fileID: 1785858127}
   - component: {fileID: 1473106682}
   - component: {fileID: 416117557}
   m_Layer: 0
@@ -265,44 +263,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb7c2746b6775d48abab072135f7cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: {fileID: 11400000, guid: 4788fcbbdc1f27b47b394b8880f80eb5, type: 2}
-  Health: {fileID: 11400000, guid: d829f41327d7aa646b47cea79332047a, type: 2}
-  playerClass: {fileID: 11400000, guid: 808e98d9e5321a746abbe8dc7802caa3, type: 2}
---- !u!114 &416117550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6880522182970965621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f841a300c37ee9748aeedf39e5366878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   speed: 1
-  critChance: 0.25
---- !u!114 &1785858127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6880522182970965621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0548f971f5fcbaf4bad1f44fae5f1a3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  critChance: 0.1
+  attackWaitTime: 0.3
   startTimeBetweenMeleeAttack: 0.3
   meleeDamage: 4
-  critChance: 0.1
   critModifier: 3
-  crit: 0
-  startTimeBetweenProjectile: 1
-  projectileDamage: 10
-  Projectile: {fileID: 2530687475535011474, guid: b0e9b1b969713e4468ed6899d497f525,
-    type: 3}
   attackPos: {fileID: 1166048868}
   whatIsEnemies:
     serializedVersion: 2
@@ -313,6 +279,14 @@ MonoBehaviour:
   attackRange: {fileID: 11400000, guid: 4ba563a53a59cc84d81c4dce004fd79a, type: 2}
   defaultAttackRange: 0.1
   knockback: 100
+  Projectile: {fileID: 2530687475535011474, guid: b0e9b1b969713e4468ed6899d497f525,
+    type: 3}
+  projectileDamage: 10
+  maxProjectiles: 5
+  startTimeBetweenProjectile: 1
+  MaxHealth: {fileID: 11400000, guid: 4788fcbbdc1f27b47b394b8880f80eb5, type: 2}
+  Health: {fileID: 11400000, guid: d829f41327d7aa646b47cea79332047a, type: 2}
+  playerClass: {fileID: 11400000, guid: 808e98d9e5321a746abbe8dc7802caa3, type: 2}
 --- !u!114 &1473106682
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 718381657828118450, guid: 53f011ccd8fc77f449f9342fe69f0b22,
     type: 3}
-  timeBetweenSpawns: 2
+  timeBetweenSpawns: 5
 --- !u!58 &4784453612098889564
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -127,4 +127,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf410ce833a76845bab7871ed130b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfHits: 10
+  numberOfHits: 2

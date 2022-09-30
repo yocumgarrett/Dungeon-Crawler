@@ -5,6 +5,15 @@ using System;
 
 public class Player : MonoBehaviour
 {
+    enum PlayerState
+    {
+        Idle,
+        Walking,
+        Attacking,
+        HitStun
+    }
+    private PlayerState state;
+
     public static event Action OnPlayerHit;
     public static event Action OnAttack;
     private Animator animator;
@@ -18,7 +27,6 @@ public class Player : MonoBehaviour
     public float critChance;
     public float attackWaitTime;
     private bool crit;
-    private bool attacking = false;
 
     private float timeBetweenMeleeAttack;
     public float startTimeBetweenMeleeAttack;
@@ -40,6 +48,9 @@ public class Player : MonoBehaviour
     public float startTimeBetweenProjectile;
     private float timeBetweenProjectile;
 
+    [Header("HitStun")]
+    public float hitstunWaitTime;
+
     [Header("Stats")]
     public FloatVariable MaxHealth, Health;
 
@@ -54,7 +65,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        
+        state = PlayerState.Idle;
         myRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         attackRange.value = defaultAttackRange;
@@ -66,10 +77,13 @@ public class Player : MonoBehaviour
         changeInPosition = Vector3.zero;
         changeInPosition.x = Input.GetAxisRaw("Horizontal");
         changeInPosition.y = Input.GetAxisRaw("Vertical");
+        if(changeInPosition != Vector3.zero && state != PlayerState.Attacking && state != PlayerState.HitStun)
+        {
+            state = PlayerState.Walking;
+        }
         if (Input.GetButtonDown("attack"))
         {
-            
-            attacking = true;
+            state = PlayerState.Attacking;
             float critOutcome = UnityEngine.Random.value;
             if (critOutcome >= 0 && critOutcome <= critChance)
                 crit = true;
@@ -91,6 +105,11 @@ public class Player : MonoBehaviour
         }
         else
             timeBetweenProjectile -= Time.deltaTime;
+    }
+
+    private void FixedUpdate()
+    {
+        UpdateAnimationAndMove();
     }
 
     private void Attack()
@@ -144,30 +163,81 @@ public class Player : MonoBehaviour
 
     private IEnumerator AttackCo(bool crit)
     {
+        string attack_bool;
         if (crit)
-        {
-            animator.SetBool("attacking-crit", true);
-            yield return null;
-            animator.SetBool("attacking-crit", false);
-            yield return new WaitForSeconds(attackWaitTime);
-        }
+            attack_bool = "attacking-crit";
         else
-        {
-            animator.SetBool("attacking", true);
-            yield return null;
-            animator.SetBool("attacking", false);
-            yield return new WaitForSeconds(attackWaitTime);
-        }
-        attacking = false;
+            attack_bool = "attacking";
+        ChooseAttackAnimation();
+        animator.SetBool(attack_bool, true);
+        yield return null;
+        animator.SetBool(attack_bool, false);
+        yield return new WaitForSeconds(attackWaitTime);
+
+        state = PlayerState.Idle;
     }
 
-    private void FixedUpdate()
+    void ChooseAttackAnimation()
     {
-        UpdateAnimationAndMove();
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = new Vector3(mousePos.x - transform.position.x, mousePos.y - transform.position.y, 0).normalized;
+        float octagonal_direction = CalculateOctagonalDirection(direction);
+        switch (octagonal_direction)
+        {
+            case 0:
+                animator.SetFloat("moveX", 1);
+                animator.SetFloat("moveY", 0);
+                break;
+            case 1:
+                animator.SetFloat("moveX", 1);
+                animator.SetFloat("moveY", 1);
+                break;
+            case 2:
+                animator.SetFloat("moveX", 0);
+                animator.SetFloat("moveY", 1);
+                break;
+            case 3:
+                animator.SetFloat("moveX", -1);
+                animator.SetFloat("moveY", 1);
+                break;
+            case 4:
+                animator.SetFloat("moveX", -1);
+                animator.SetFloat("moveY", 0);
+                break;
+            case 5:
+                animator.SetFloat("moveX", -1);
+                animator.SetFloat("moveY", -1);
+                break;
+            case 6:
+                animator.SetFloat("moveX", 0);
+                animator.SetFloat("moveY", -1);
+                break;
+            case 7:
+                animator.SetFloat("moveX", 1);
+                animator.SetFloat("moveY", -1);
+                break;
+            case 8:
+                animator.SetFloat("moveX", 1);
+                animator.SetFloat("moveY", 0);
+                break;
+            default:
+                animator.SetFloat("moveX", 0);
+                animator.SetFloat("moveY", -1);
+                break;
+        }
+    }
+
+    private float CalculateOctagonalDirection(Vector3 direction)
+    {
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360f;
+        var dir = Mathf.Floor((angle + 22.5f) / 45f);
+        return dir;
     }
 
     private void TakeDamage(float damage)
     {
+        StartCoroutine(HitstunCo());
         Health.value -= damage;
         if (Health.value <= 0)
         {
@@ -176,17 +246,27 @@ public class Player : MonoBehaviour
         OnPlayerHit?.Invoke();
     }
 
+    private IEnumerator HitstunCo()
+    {
+        state = PlayerState.HitStun;
+        animator.SetBool("hitstun", true);
+        yield return null;
+        animator.SetBool("hitstun", false);
+        yield return new WaitForSeconds(hitstunWaitTime);
+        state = PlayerState.Idle;
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            TakeDamage(20);
+            TakeDamage(1);
         }
     }
 
     void UpdateAnimationAndMove()
     {
-        if (changeInPosition != Vector3.zero && !attacking)
+        if (changeInPosition != Vector3.zero && state != PlayerState.Attacking && state != PlayerState.HitStun)
         {
             MovePlayer();
             animator.SetFloat("moveX", changeInPosition.x);

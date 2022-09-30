@@ -67,46 +67,49 @@ public class EnemyAI : MonoBehaviour
     {
         if(moveDirection != Vector2.zero)
         {
-            var angle = CalculateDirectionAngle(moveDirection);
-            if (angle >= 247.5 && angle < 292.5)
+            float octagonal_direction = CalculateOctagonalDirection(moveDirection);
+            switch (octagonal_direction)
             {
-                animator.SetFloat("moveX", 0);
-                animator.SetFloat("moveY", -1);
-            }
-            else if (angle >= 292.5 && angle < 337.5)
-            {
-                animator.SetFloat("moveX", 1);
-                animator.SetFloat("moveY", -1);
-            }
-            else if (angle >= 337.5 || angle < 22.5)
-            {
-                animator.SetFloat("moveX", 1);
-                animator.SetFloat("moveY", 0);
-            }
-            else if (angle >= 22.5 && angle < 67.5)
-            {
-                animator.SetFloat("moveX", 1);
-                animator.SetFloat("moveY", 1);
-            }
-            else if (angle >= 67.5 && angle < 112.5)
-            {
-                animator.SetFloat("moveX", 0);
-                animator.SetFloat("moveY", 1);
-            }
-            else if (angle >= 112.5 && angle < 157.5)
-            {
-                animator.SetFloat("moveX", -1);
-                animator.SetFloat("moveY", 1);
-            }
-            else if (angle >= 157.5 && angle < 202.5)
-            {
-                animator.SetFloat("moveX", -1);
-                animator.SetFloat("moveY", 0);
-            }
-            else if (angle >= 202.5 && angle < 247.5)
-            {
-                animator.SetFloat("moveX", -1);
-                animator.SetFloat("moveY", -1);
+                case 0:
+                    animator.SetFloat("moveX", 1);
+                    animator.SetFloat("moveY", 0);
+                    break;
+                case 1:
+                    animator.SetFloat("moveX", 1);
+                    animator.SetFloat("moveY", 1);
+                    break;
+                case 2:
+                    animator.SetFloat("moveX", 0);
+                    animator.SetFloat("moveY", 1);
+                    break;
+                case 3:
+                    animator.SetFloat("moveX", -1);
+                    animator.SetFloat("moveY", 1);
+                    break;
+                case 4:
+                    animator.SetFloat("moveX", -1);
+                    animator.SetFloat("moveY", 0);
+                    break;
+                case 5:
+                    animator.SetFloat("moveX", -1);
+                    animator.SetFloat("moveY", -1);
+                    break;
+                case 6:
+                    animator.SetFloat("moveX", 0);
+                    animator.SetFloat("moveY", -1);
+                    break;
+                case 7:
+                    animator.SetFloat("moveX", 1);
+                    animator.SetFloat("moveY", -1);
+                    break;
+                case 8:
+                    animator.SetFloat("moveX", 1);
+                    animator.SetFloat("moveY", 0);
+                    break;
+                default:
+                    animator.SetFloat("moveX", 0);
+                    animator.SetFloat("moveY", -1);
+                    break;
             }
         }
     }
@@ -169,10 +172,11 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    private float CalculateDirectionAngle(Vector3 direction)
+    private float CalculateOctagonalDirection(Vector3 direction)
     {
         var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360f;
-        return angle;
+        var dir = Mathf.Floor((angle + 22.5f) / 45f);
+        return dir;
     }
 }

@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target_tag: Player
-  speed: 10
+  speed: 5
   rb: {fileID: 6714208601258838782}
   bodyCollider: {fileID: 718381657931464522}
   animator: {fileID: 2845736650341344698}

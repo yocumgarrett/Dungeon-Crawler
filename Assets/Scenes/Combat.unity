@@ -356,11 +356,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4624169353432099111, guid: 07f89719b86e6fa45b9f73a5fb7480bc,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07f89719b86e6fa45b9f73a5fb7480bc, type: 3}
 --- !u!1001 &998379132

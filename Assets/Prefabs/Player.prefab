@@ -267,7 +267,7 @@ MonoBehaviour:
   critChance: 0.1
   attackWaitTime: 0.3
   startTimeBetweenMeleeAttack: 0.3
-  meleeDamage: 4
+  meleeDamage: 10
   critModifier: 3
   attackPos: {fileID: 1166048868}
   whatIsEnemies:
@@ -282,8 +282,9 @@ MonoBehaviour:
   Projectile: {fileID: 2530687475535011474, guid: b0e9b1b969713e4468ed6899d497f525,
     type: 3}
   projectileDamage: 10
-  maxProjectiles: 5
+  maxProjectiles: 100
   startTimeBetweenProjectile: 1
+  hitstunWaitTime: 0.2
   MaxHealth: {fileID: 11400000, guid: 4788fcbbdc1f27b47b394b8880f80eb5, type: 2}
   Health: {fileID: 11400000, guid: d829f41327d7aa646b47cea79332047a, type: 2}
   playerClass: {fileID: 11400000, guid: 808e98d9e5321a746abbe8dc7802caa3, type: 2}

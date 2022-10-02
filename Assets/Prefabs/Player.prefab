@@ -264,11 +264,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  critChance: 0.1
+  baseCritChance: 0.1
+  CritChance: {fileID: 11400000, guid: 08309e9fdcd98d3469b16210b1149564, type: 2}
   attackWaitTime: 0.3
   startTimeBetweenMeleeAttack: 0.3
-  meleeDamage: 10
-  critModifier: 3
+  meleeDamage: 5
+  critModifier: 2
   attackPos: {fileID: 1166048868}
   whatIsEnemies:
     serializedVersion: 2
@@ -282,7 +283,9 @@ MonoBehaviour:
   Projectile: {fileID: 2530687475535011474, guid: b0e9b1b969713e4468ed6899d497f525,
     type: 3}
   projectileDamage: 10
-  maxProjectiles: 100
+  maxProjectiles: {fileID: 11400000, guid: 31a295daeeb863b42b08e0ac1950b380, type: 2}
+  numberProjectilesHeld: {fileID: 11400000, guid: a107ca44b8513da4ea845ec8149ea4c0,
+    type: 2}
   startTimeBetweenProjectile: 1
   hitstunWaitTime: 0.2
   MaxHealth: {fileID: 11400000, guid: 4788fcbbdc1f27b47b394b8880f80eb5, type: 2}

@@ -241,6 +241,14 @@ MonoBehaviour:
   minSpawnEnergy: 2
   maxSpawnEnergy: 15
   Energy: {fileID: 553333384477861091, guid: 428e78b7aecca0e43aa1be572a5bfb20, type: 3}
+  PlayerMaxProjectiles: {fileID: 11400000, guid: 31a295daeeb863b42b08e0ac1950b380,
+    type: 2}
+  PlayerCurrentProjectiles: {fileID: 11400000, guid: a107ca44b8513da4ea845ec8149ea4c0,
+    type: 2}
+  chanceToSpawnProjectile: 0.1
+  Powerups:
+  - {fileID: 1025784142646308125, guid: d247fd7a6c96c8d40a1948c58e12de73, type: 3}
+  - {fileID: 5191763594158300566, guid: 82aa09c167c39ea45bbc431c35b30465, type: 3}
 --- !u!95 &2845736650341344698
 Animator:
   serializedVersion: 3

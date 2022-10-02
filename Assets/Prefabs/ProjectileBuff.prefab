@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2530687475535011474
+--- !u!1 &5191763594158300566
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2530687475535011473}
-  - component: {fileID: 2530687475535011472}
-  - component: {fileID: 2530687475535011475}
-  - component: {fileID: 2530687475535011478}
-  - component: {fileID: 1747473308}
+  - component: {fileID: 5191763594158300568}
+  - component: {fileID: 5191763594158300569}
+  - component: {fileID: 7185575261624935698}
+  - component: {fileID: 8646922394197689531}
   m_Layer: 0
-  m_Name: Warrior Axe
+  m_Name: ProjectileBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2530687475535011473
+--- !u!4 &5191763594158300568
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2530687475535011474}
+  m_GameObject: {fileID: 5191763594158300566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.41, y: 0, z: 0}
+  m_LocalPosition: {x: -1.1523057, y: -0.14530745, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2530687475535011472
+--- !u!212 &5191763594158300569
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2530687475535011474}
+  m_GameObject: {fileID: 5191763594158300566}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -70,8 +69,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 304872673
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f4aea07485ab9474cbabbdd74b3adc42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,34 +83,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &2530687475535011475
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2530687475535011474}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!58 &2530687475535011478
+--- !u!58 &7185575261624935698
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2530687475535011474}
+  m_GameObject: {fileID: 5191763594158300566}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -120,21 +98,18 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.06
---- !u!114 &1747473308
+  m_Radius: 0.045
+--- !u!114 &8646922394197689531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2530687475535011474}
+  m_GameObject: {fileID: 5191763594158300566}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34dab5b5d90844843a0ae6dab6a5eef2, type: 3}
+  m_Script: {fileID: 11500000, guid: 97bebf3d5b4199e4ba6e473d50f9a6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 2530687475535011475}
-  moveSpeed: 175
-  rotationSpeed: 2
-  damage: 10
-  hitCounter: 3
+  powerupEffect: {fileID: 11400000, guid: 6fe27cd17d51cb5408fdddb65b675fbf, type: 2}
+  spawnWaitTime: 1

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class EnemyAI : MonoBehaviour
     public int minSpawnEnergy;
     public int maxSpawnEnergy;
     public GameObject Energy;
+    public FloatVariable PlayerMaxProjectiles;
+    public FloatVariable PlayerCurrentProjectiles;
+    public GameObject[] Powerups;
 
     void Start()
     {
@@ -147,6 +151,7 @@ public class EnemyAI : MonoBehaviour
         bodyCollider.enabled = false;
         Vector3 deathPosition = transform.parent.transform.position;
         SpawnEnergyOnDeath(deathPosition);
+        SpawnProjectileOnDeath(deathPosition);
         state = EnemyState.Death;
         animator.SetBool("die", true);
         yield return new WaitForSeconds(deathTimeInSeconds);
@@ -156,10 +161,20 @@ public class EnemyAI : MonoBehaviour
 
     public void SpawnEnergyOnDeath(Vector3 pos)
     {
-        var numToSpawn = Random.Range(minSpawnEnergy, maxSpawnEnergy);
+        var numToSpawn = UnityEngine.Random.Range(minSpawnEnergy, maxSpawnEnergy);
         for (var i = 0; i < numToSpawn; i++)
         {
             GameObject toSpawn = Instantiate(Energy, pos, Quaternion.identity);
+        }
+    }
+
+    public void SpawnProjectileOnDeath(Vector3 pos)
+    {
+        var chance_to_spawn = ( PlayerMaxProjectiles.value - PlayerCurrentProjectiles.value ) / ( PlayerMaxProjectiles.value * 2f );
+        var outcome = UnityEngine.Random.value;
+        if(outcome <= chance_to_spawn)
+        {
+            GameObject toSpawn = Instantiate(Powerups[1], pos, Quaternion.identity);
         }
     }
 

@@ -21,15 +21,5 @@ public class EnemyHealth : MonoBehaviour
                 enemyAI.TookDamage(knockback);
         }
     }
-
-    public void SpawnEnergyOnDeath(Vector3 pos)
-    {
-        var numToSpawn = Random.Range(minSpawnEnergy, maxSpawnEnergy);
-        for (var i = 0; i < numToSpawn; i++)
-        {
-            GameObject toSpawn = Instantiate(Energy, pos, Quaternion.identity);
-        }
-    }
-
     
 }

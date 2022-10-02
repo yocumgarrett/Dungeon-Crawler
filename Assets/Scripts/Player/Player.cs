@@ -24,7 +24,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D myRigidbody;
     
     [Header("Attack")]
-    public float critChance;
+    public float baseCritChance;
+    public FloatVariable CritChance;
     public float attackWaitTime;
     private bool crit;
 
@@ -43,8 +44,8 @@ public class Player : MonoBehaviour
     [Header("Projectile")]
     public GameObject Projectile;
     public int projectileDamage;
-    public int maxProjectiles;
-    private int numberProjectilesHeld;
+    public FloatVariable maxProjectiles;
+    public FloatVariable numberProjectilesHeld;
     public float startTimeBetweenProjectile;
     private float timeBetweenProjectile;
 
@@ -52,7 +53,8 @@ public class Player : MonoBehaviour
     public float hitstunWaitTime;
 
     [Header("Stats")]
-    public FloatVariable MaxHealth, Health;
+    public FloatVariable MaxHealth;
+    public FloatVariable Health;
 
     [Header("Attributes")]
     public PlayerClass playerClass;
@@ -61,6 +63,7 @@ public class Player : MonoBehaviour
     {
         MaxHealth.value = playerClass.health;
         Health.value = playerClass.health;
+        CritChance.value = baseCritChance;
     }
 
     void Start()
@@ -69,7 +72,7 @@ public class Player : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         attackRange.value = defaultAttackRange;
-        numberProjectilesHeld = maxProjectiles;
+        numberProjectilesHeld.value = maxProjectiles.value;
     }
 
     private void Update()
@@ -85,7 +88,7 @@ public class Player : MonoBehaviour
         {
             state = PlayerState.Attacking;
             float critOutcome = UnityEngine.Random.value;
-            if (critOutcome >= 0 && critOutcome <= critChance)
+            if (critOutcome >= 0 && critOutcome <= CritChance.value)
                 crit = true;
             else
                 crit = false;
@@ -96,10 +99,10 @@ public class Player : MonoBehaviour
 
         if (timeBetweenProjectile <= 0)
         {
-            if (Input.GetMouseButtonDown(1) && numberProjectilesHeld > 0)
+            if (Input.GetMouseButtonDown(1) && numberProjectilesHeld.value > 0)
             {
                 SpawnProjectile();
-                --numberProjectilesHeld;
+                --numberProjectilesHeld.value;
                 OnAttack?.Invoke();
             }
         }

@@ -241,6 +241,7 @@ public class Player_v1 : MonoBehaviour
     {
         StartCoroutine(HitStunCoroutine());
         Health.value -= damage;
+        GameManager.Instance.HealthChanged();
         if (Health.value <= 0)
         {
             Destroy(gameObject);

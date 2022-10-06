@@ -37,11 +37,6 @@ public class Enemy_v1 : MonoBehaviour
         SetState(EnemyState.Idle);
     }
 
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         if (enemyState == EnemyState.Aggro)

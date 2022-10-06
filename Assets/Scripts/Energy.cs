@@ -37,6 +37,7 @@ public class Energy : MonoBehaviour, ICollectible
     public void Collect()
     {
         Destroy(gameObject);
+        GameManager.Instance.EnergyCollected();
         OnEnergyCollected?.Invoke();
     }
 

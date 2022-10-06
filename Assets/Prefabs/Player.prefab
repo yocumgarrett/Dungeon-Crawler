@@ -151,10 +151,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6880522182970965625}
   - component: {fileID: 6880522182970965626}
-  - component: {fileID: 6880522182970965624}
-  - component: {fileID: 8866256359296227626}
+  - component: {fileID: 4271857371486360259}
   - component: {fileID: 1473106682}
   - component: {fileID: 416117557}
+  - component: {fileID: 616490114}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -230,28 +230,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &6880522182970965624
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6880522182970965621}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 2
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!114 &8866256359296227626
+--- !u!114 &4271857371486360259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,37 +239,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 6880522182970965621}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb7c2746b6775d48abab072135f7cc5, type: 3}
+  m_Script: {fileID: 11500000, guid: c9754bcaa4ff7294d8a8d847ece078de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  baseCritChance: 0.1
-  CritChance: {fileID: 11400000, guid: 08309e9fdcd98d3469b16210b1149564, type: 2}
+  moveSpeed: 1
+  myRigidbody: {fileID: 616490114}
   attackWaitTime: 0.3
-  startTimeBetweenMeleeAttack: 0.3
-  meleeDamage: 5
-  critModifier: 2
-  attackPos: {fileID: 1166048868}
-  whatIsEnemies:
+  attackCenterPoint: {fileID: 1166048868}
+  attackRadius: {fileID: 11400000, guid: 4ba563a53a59cc84d81c4dce004fd79a, type: 2}
+  enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  whatIsBreakable:
+  breakableObjectLayer:
     serializedVersion: 2
     m_Bits: 512
-  attackRange: {fileID: 11400000, guid: 4ba563a53a59cc84d81c4dce004fd79a, type: 2}
-  defaultAttackRange: 0.1
-  knockback: 100
+  knockbackMagnitude: 100
+  attackDamage: 5
+  PlayerCritChance: {fileID: 11400000, guid: 08309e9fdcd98d3469b16210b1149564, type: 2}
+  criticalDamageModifier: 2
   Projectile: {fileID: 2530687475535011474, guid: b0e9b1b969713e4468ed6899d497f525,
     type: 3}
-  projectileDamage: 10
-  maxProjectiles: {fileID: 11400000, guid: 31a295daeeb863b42b08e0ac1950b380, type: 2}
-  numberProjectilesHeld: {fileID: 11400000, guid: a107ca44b8513da4ea845ec8149ea4c0,
-    type: 2}
-  startTimeBetweenProjectile: 1
-  hitstunWaitTime: 0.2
-  MaxHealth: {fileID: 11400000, guid: 4788fcbbdc1f27b47b394b8880f80eb5, type: 2}
+  shootWaitTime: 0.2
+  MaxProjectiles: {fileID: 11400000, guid: 31a295daeeb863b42b08e0ac1950b380, type: 2}
+  hitStunWaitTime: 0.2
   Health: {fileID: 11400000, guid: d829f41327d7aa646b47cea79332047a, type: 2}
-  playerClass: {fileID: 11400000, guid: 808e98d9e5321a746abbe8dc7802caa3, type: 2}
 --- !u!114 &1473106682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c616f6abc7ad3f345ab0a54459faaa9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.2
+  radius: 0.1
   attackPositionObject: {fileID: 1166048867}
 --- !u!95 &416117557
 Animator:
@@ -324,6 +296,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &616490114
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880522182970965621}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 2
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &7952118460755048809
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +329,7 @@ GameObject:
   - component: {fileID: 8221816500627511184}
   - component: {fileID: 4799721610303173606}
   m_Layer: 0
-  m_Name: CollectorCollider
+  m_Name: BodyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -371,7 +364,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.08
 --- !u!114 &4799721610303173606
 MonoBehaviour:
   m_ObjectHideFlags: 0

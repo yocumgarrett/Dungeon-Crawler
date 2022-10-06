@@ -174,6 +174,7 @@ public class EnemyAI : MonoBehaviour
         var outcome = UnityEngine.Random.value;
         if(outcome <= chance_to_spawn)
         {
+            PlayerCurrentProjectiles.value += 1;
             GameObject toSpawn = Instantiate(Powerups[1], pos, Quaternion.identity);
         }
     }

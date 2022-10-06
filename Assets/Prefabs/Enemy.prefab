@@ -64,6 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 718381657918861796}
   - component: {fileID: 718381657918861795}
+  - component: {fileID: 1333637077441225266}
   m_Layer: 0
   m_Name: PlayerDetector
   m_TagString: Untagged
@@ -100,7 +101,20 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 1
+--- !u!114 &1333637077441225266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718381657918861797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50458321d9d202f4ba88bddd2c08ff9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detector: {fileID: 718381657931464524}
 --- !u!1 &718381657931464524
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,8 +126,8 @@ GameObject:
   - component: {fileID: 718381657931464523}
   - component: {fileID: 1226034189}
   - component: {fileID: 718381657931464522}
+  - component: {fileID: 8278440116447117302}
   - component: {fileID: 718381657931464521}
-  - component: {fileID: 8368916809290240493}
   - component: {fileID: 2845736650341344698}
   m_Layer: 8
   m_Name: Body
@@ -202,7 +216,28 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.08
+--- !u!114 &8278440116447117302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718381657931464524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac285684411e7da4f9a47e10d2695f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyState: 0
+  chaseSpeed: 10
+  myRigidbody: {fileID: 6714208601258838782}
+  myAnimator: {fileID: 2845736650341344698}
+  myCollider: {fileID: 718381657931464522}
+  detectionCollider: {fileID: 718381657918861795}
+  health: 20
+  knockbackTimeInSeconds: 0.15
+  deathTimeInSeconds: 5
 --- !u!114 &718381657931464521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,36 +254,6 @@ MonoBehaviour:
   minSpawnEnergy: 2
   maxSpawnEnergy: 15
   Energy: {fileID: 553333384477861091, guid: 428e78b7aecca0e43aa1be572a5bfb20, type: 3}
---- !u!114 &8368916809290240493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718381657931464524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10d4afe87bbf6b44c976341adf4ee22a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target_tag: Player
-  speed: 5
-  rb: {fileID: 6714208601258838782}
-  bodyCollider: {fileID: 718381657931464522}
-  animator: {fileID: 2845736650341344698}
-  knockbackTimeInSeconds: 0.1
-  deathTimeInSeconds: 5
-  minSpawnEnergy: 2
-  maxSpawnEnergy: 15
-  Energy: {fileID: 553333384477861091, guid: 428e78b7aecca0e43aa1be572a5bfb20, type: 3}
-  PlayerMaxProjectiles: {fileID: 11400000, guid: 31a295daeeb863b42b08e0ac1950b380,
-    type: 2}
-  PlayerCurrentProjectiles: {fileID: 11400000, guid: a107ca44b8513da4ea845ec8149ea4c0,
-    type: 2}
-  chanceToSpawnProjectile: 0.1
-  Powerups:
-  - {fileID: 1025784142646308125, guid: d247fd7a6c96c8d40a1948c58e12de73, type: 3}
-  - {fileID: 5191763594158300566, guid: 82aa09c167c39ea45bbc431c35b30465, type: 3}
 --- !u!95 &2845736650341344698
 Animator:
   serializedVersion: 3

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1747473308}
   m_Layer: 0
   m_Name: Warrior Axe
-  m_TagString: Untagged
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,3 +138,4 @@ MonoBehaviour:
   rotationSpeed: 2
   damage: 10
   hitCounter: 3
+  damageLayer: 8

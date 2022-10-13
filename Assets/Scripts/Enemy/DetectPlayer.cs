@@ -13,11 +13,6 @@ public class DetectPlayer : MonoBehaviour
         playerDetected = false;
     }
 
-    private void Update()
-    {
-        //Debug.Log(playerDetected);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -33,22 +28,21 @@ public class DetectPlayer : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        var detector_body = detector.GetComponent<Enemy_v1>();
+        if (detector_body)
         {
-            playerDetected = true;
-            chaseTarget = collision.gameObject;
-            var detector_body = detector.GetComponent<Enemy_v1>();
-            Debug.Log(detector_body);
-            if (detector_body)
+            if(detector_body.GetState() == Enemy_v1.EnemyState.Idle && collision.gameObject.tag == "Player")
             {
+                playerDetected = true;
+                chaseTarget = collision.gameObject;
+
                 detector_body.SetState(Enemy_v1.EnemyState.Aggro);
                 detector_body.SetTarget(collision.gameObject);
             }
         }
     }
-    */
 
     private void OnTriggerExit2D(Collider2D collision)
     {

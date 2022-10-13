@@ -5,7 +5,7 @@ using UnityEngine;
 public class Powerup : MonoBehaviour
 {
     public PowerupEffect powerupEffect;
-    private float spawnWaitTime = 1f;
+    private float spawnWaitTime = .5f;
     private Collider2D myCollider;
 
     private void Start()

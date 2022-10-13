@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy_v1 : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Enemy_v1 : MonoBehaviour
     }
     public EnemyState enemyState;
     public void SetState(EnemyState state) { enemyState = state; }
+    public EnemyState GetState() { return enemyState; }
 
     [Header("Move")]
     public float chaseSpeed;
@@ -29,12 +31,37 @@ public class Enemy_v1 : MonoBehaviour
 
     [Header("Health")]
     public float health;
+    public float maxHealth;
+    public Slider healthSlider;
+    public GameObject healthBarUI;
     public float knockbackTimeInSeconds;
     public float deathTimeInSeconds;
+
+    [Header("Projectile")]
+    public GameObject Projectile;
+    public float shootWaitTime;
+    private float shootCooldownTime = 0f;
+    public float shootCoroutineTime;
 
     void Start()
     {
         SetState(EnemyState.Idle);
+        health = maxHealth;
+        UpdateHealthSlider();
+    }
+
+    private void Update()
+    {
+        if (enemyState == EnemyState.Aggro)
+        {
+            if (shootCooldownTime <= 0)
+            {
+                StartCoroutine(ShootCoroutine());
+                shootCooldownTime = shootWaitTime;
+            }
+            else
+                shootCooldownTime -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -120,6 +147,7 @@ public class Enemy_v1 : MonoBehaviour
     public void TakeDamage(float damage, Vector2 knockbackVector, GameObject target)
     {
         health -= damage;
+        UpdateHealthSlider();
         if (health <= 0)
         {
             GameManager.Instance.EnemyKill(this.gameObject.tag, transform.parent.transform.position);
@@ -150,11 +178,41 @@ public class Enemy_v1 : MonoBehaviour
         detectionCollider.enabled = false;
         myRigidbody.velocity = Vector2.zero;
         Vector3 death_pos = transform.parent.transform.position;
-        //SpawnEnergyOnDeath(deathPosition);
-        //SpawnProjectileOnDeath(deathPosition);
         myAnimator.SetBool("die", true);
         yield return new WaitForSeconds(deathTimeInSeconds);
         //add phase out and instantiate head to kick around
         Destroy(transform.parent.gameObject);
+    }
+
+    IEnumerator ShootCoroutine()
+    {
+        SetState(EnemyState.Shoot);
+        myRigidbody.velocity = Vector2.zero;
+        yield return new WaitForSeconds(shootCoroutineTime);
+        if(enemyState == EnemyState.Shoot)
+        {
+            Shoot();
+            SetState(EnemyState.Idle);
+        }
+    }
+
+    private void Shoot()
+    {
+        GameObject spawnedProjectile = Instantiate(Projectile, transform.position, Quaternion.identity);
+        var projectileScript = spawnedProjectile.GetComponent<Projectile>();
+
+        if (projectileScript && chaseTarget)
+        {
+            var target_pos = chaseTarget.transform.position;
+            var parent_pos = transform.parent.transform.position;
+            var dir = new Vector2(target_pos.x - parent_pos.x, target_pos.y - parent_pos.y);
+            projectileScript.ShootProjectile(dir);
+        }
+    }
+
+    private void UpdateHealthSlider()
+    {
+        if (health < maxHealth) healthBarUI.SetActive(true);
+        healthSlider.value = health / maxHealth;
     }
 }

@@ -38,7 +38,7 @@ public class Player_v1 : MonoBehaviour
     public GameObject Projectile;
     public float shootWaitTime;
     private float shootCooldownTime = 0f;
-    private float numberProjectilesHeld;
+    public FloatVariable CurrentProjectiles;
     public FloatVariable MaxProjectiles;
 
 
@@ -47,13 +47,15 @@ public class Player_v1 : MonoBehaviour
     private float hitStunCooldownTime;
 
     [Header("Health")]
+    public FloatVariable MaxHealth;
     public FloatVariable Health;
 
     void Start()
     {
         SetState(PlayerState.Idle);
         animator = GetComponent<Animator>();
-        numberProjectilesHeld = MaxProjectiles.value;
+        Health.value = MaxHealth.value;
+        CurrentProjectiles.value = MaxProjectiles.value;
     }
 
     void Update()
@@ -62,7 +64,7 @@ public class Player_v1 : MonoBehaviour
         if (shootCooldownTime <= 0)
         {
             bool shootInput = Input.GetMouseButtonDown(1);
-            if (shootInput && numberProjectilesHeld > 0)
+            if (shootInput && CurrentProjectiles.value > 0)
             {
                 Shoot();
                 shootCooldownTime = shootWaitTime;
@@ -108,6 +110,10 @@ public class Player_v1 : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
+        {
+            TakeDamage(1);
+        }
+        if(other.gameObject.tag == "EnemyProjectile")
         {
             TakeDamage(1);
         }
@@ -237,7 +243,7 @@ public class Player_v1 : MonoBehaviour
         return dir;
     }
 
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         StartCoroutine(HitStunCoroutine());
         Health.value -= damage;
@@ -264,7 +270,8 @@ public class Player_v1 : MonoBehaviour
 
     private void Shoot()
     {
-        --numberProjectilesHeld;
+        --CurrentProjectiles.value;
+        GameManager.Instance.NumberProjectilesChanged();
 
         GameObject spawnedProjectile = Instantiate(Projectile, transform.position, Quaternion.identity);
         var projectileScript = spawnedProjectile.GetComponent<Projectile>();

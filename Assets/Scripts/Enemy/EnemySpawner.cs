@@ -8,15 +8,18 @@ public class EnemySpawner : MonoBehaviour
     public float timeBetweenSpawns;
     private float spawnTimer = 0f;
     private Vector3 spawnerPosition;
+    private bool spawnEnemies;
+    public void SetToSpawn(bool to_spawn) { spawnEnemies = to_spawn; }
 
     void Start()
     {
         spawnerPosition = transform.position;
+        SetToSpawn(true);
     }
 
     void Update()
     {
-        if (spawnTimer >= timeBetweenSpawns)
+        if (spawnTimer >= timeBetweenSpawns && spawnEnemies)
         {
             SpawnEnemy();
             spawnTimer = 0f;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 916994987}
   - component: {fileID: 916994988}
   - component: {fileID: 9022939281806598659}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MagnetCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1166048868}
   - component: {fileID: 1442942165}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AttackPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 1473106682}
   - component: {fileID: 416117557}
   - component: {fileID: 616490114}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -260,8 +260,10 @@ MonoBehaviour:
   Projectile: {fileID: 2530687475535011474, guid: b0e9b1b969713e4468ed6899d497f525,
     type: 3}
   shootWaitTime: 0.2
+  CurrentProjectiles: {fileID: 11400000, guid: a107ca44b8513da4ea845ec8149ea4c0, type: 2}
   MaxProjectiles: {fileID: 11400000, guid: 31a295daeeb863b42b08e0ac1950b380, type: 2}
   hitStunWaitTime: 0.2
+  MaxHealth: {fileID: 11400000, guid: 4788fcbbdc1f27b47b394b8880f80eb5, type: 2}
   Health: {fileID: 11400000, guid: d829f41327d7aa646b47cea79332047a, type: 2}
 --- !u!114 &1473106682
 MonoBehaviour:
@@ -328,9 +330,9 @@ GameObject:
   - component: {fileID: 7173999042987035734}
   - component: {fileID: 8221816500627511184}
   - component: {fileID: 4799721610303173606}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BodyCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
